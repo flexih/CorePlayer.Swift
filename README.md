@@ -1,5 +1,5 @@
 # CorePlayer.Swift
-A iOS and OS X media player framework based on AVPlayer.
+A iOS and OSX media player framework based on AVPlayer.
 
 ## Requirements
 - iOS 7.0+
