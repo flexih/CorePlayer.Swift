@@ -7,7 +7,7 @@ A iOS and OS X media player framework based on AVPlayer.
 
 ## How To Get Started
 - Just compile source files
-- Or make a framework by yourself
+- Or make it a framework by yourself
 
 
 ## Architecture
