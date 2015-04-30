@@ -31,7 +31,7 @@ corePlayer!.moduleManager()?.initModules([ModuleView.self])
 corePlayer!.view().frame = self.view.bounds
 view.addSubview(corePlayer!.view())
 
-corePlayer.playURL(URL)
+corePlayer!.playURL(URL)
 ```
 
 ## License
