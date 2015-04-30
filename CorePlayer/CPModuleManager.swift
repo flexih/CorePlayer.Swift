@@ -203,7 +203,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func endPlayCode(errCode: NSInteger) {
         for module in modules {
-            if module.respondsToSelector("wiendPlayCode:") {
+            if module.respondsToSelector("endPlayCode:") {
                 module.endPlayCode!(errCode)
             }
         }
