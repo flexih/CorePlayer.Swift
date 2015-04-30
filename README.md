@@ -12,12 +12,12 @@ A iOS and OS X media player framework based on AVPlayer.
 
 ## Architecture
 
-### `CPModuleManager`
+#### `CPModuleManager`
 
-### `CPModule`
+#### `CPModule`
 - Conforms `CPModuleDelegate`
 
-### `CPModuleView`
+#### `CPModuleView`
 - Conforms `CPModuleViewDelegate`
 
 
