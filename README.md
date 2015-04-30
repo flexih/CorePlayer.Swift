@@ -12,25 +12,26 @@ A iOS and OS X media player framework based on AVPlayer.
 
 ## Architecture
 
-#### `CPModuleManager`
+##### `CPModuleManager`
 
-#### `CPModule`
+##### `CPModule`
 - Conforms `CPModuleDelegate`
 
-#### `CPModuleView`
+##### `CPModuleView`
 - Conforms `CPModuleViewDelegate`
 
 
 ## Usage
 
-```corePlayer = CorePlayer()
+
+`` `corePlayer = CorePlayer()
 corePlayer!.moduleManager()?.initModules([ModuleView.self])
 
 corePlayer!.view().frame = self.view.bounds
 view.addSubview(corePlayer!.view())
 
 corePlayer.playURL(URL)
-```
+` ``
 
 ## License
 
