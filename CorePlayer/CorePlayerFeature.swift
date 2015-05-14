@@ -37,7 +37,7 @@ public enum CPError: Int {
     func appendURL(url: NSURL)
     
     func avplayer() -> AVPlayer?
-    func moduleManager() -> CPModuleManager?
+    func moduleManager() -> CPModuleManager
     
     func view() -> UXView
     func playerView() -> UXView

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         corePlayer = CorePlayer()
-        corePlayer!.moduleManager()?.initModules([ModuleView.self])
+        corePlayer!.moduleManager().initModules([ModuleView.self])
         
         corePlayer!.view().frame = self.view.bounds
         corePlayer!.view().autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight

@@ -123,10 +123,6 @@ public class CorePlayer: NSObject {
         cpview.removeFromSuperview()
     }
     
-    public func durationSpan() -> NSInteger {
-        return 1
-    }
-    
     func observePlayed() {
         var span: NSTimeInterval = 1
         
@@ -163,6 +159,18 @@ public class CorePlayer: NSObject {
             return playable
         }
         return 0
+    }
+    
+    public func durationSpan() -> NSInteger {
+        return 1
+    }
+    
+    public func handlePlayEnd() {
+        
+    }
+    
+    public func handleError(error: Int) {
+        cpmoduleManager.error(error)
     }
     
     public func stop() {
@@ -421,14 +429,6 @@ public class CorePlayer: NSObject {
         if playerItem!.cduration() > 0 {
             cpmoduleManager.durationAvailable(duration())
         }
-    }
-    
-    public func handlePlayEnd() {
-    
-    }
-    
-    public func handleError(error: Int) {
-        cpmoduleManager.error(error)
     }
     
     func registerPlayerItemEvent() {
@@ -857,7 +857,7 @@ extension CorePlayer: CorePlayerFeature {
         return player
     }
 
-    public func moduleManager() -> CPModuleManager? {
+    public func moduleManager() -> CPModuleManager {
         return cpmoduleManager
     }
 
