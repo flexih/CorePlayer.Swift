@@ -34,8 +34,8 @@ class CPInterruption: NSObject {
                 if type == AVAudioSessionInterruptionType.Began.rawValue {
                     beginInterrupt()
                 } else if type == AVAudioSessionInterruptionType.Ended.rawValue {
-                    if let option: UInt = info.objectForKey(AVAudioSessionInterruptionOptionKey) as? UInt {
-                        if type == AVAudioSessionInterruptionOptions.OptionShouldResume.rawValue {
+                    if let _: UInt = info.objectForKey(AVAudioSessionInterruptionOptionKey) as? UInt {
+                        if type == AVAudioSessionInterruptionOptions.ShouldResume.rawValue {
                             endInterrupt()
                         }
                     }

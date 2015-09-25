@@ -92,7 +92,7 @@ public class CorePlayer: NSObject {
         
         let moduleManagerType = moduleManagerClass as! NSObject.Type
         
-        cpmoduleManager = moduleManagerType() as! CPModuleManager
+        cpmoduleManager = moduleManagerType.init() as! CPModuleManager
         
         #if os(iOS)
         interruption = CPInterruption()
@@ -153,7 +153,7 @@ public class CorePlayer: NSObject {
     func playable() -> NSTimeInterval {
         let loadedRanges = playerItem!.loadedTimeRanges
         if loadedRanges.count > 0 {
-            let range: CMTimeRange = (loadedRanges[0] as! NSValue).CMTimeRangeValue
+            let range: CMTimeRange = loadedRanges[0].CMTimeRangeValue
             let rangeTime = CMTimeAdd(range.start, range.duration)
             let playable = CMTimeGetSeconds(rangeTime)
             return playable
@@ -277,7 +277,7 @@ public class CorePlayer: NSObject {
         
         backPlayer?.pause()
         backPlayer?.cancelPendingPrerolls()
-        backPlayer?.currentItem.asset.cancelLoading()
+        backPlayer?.currentItem?.asset.cancelLoading()
         backView?.playerLayer().player = nil
         
         unobservePlayed()
@@ -432,7 +432,7 @@ public class CorePlayer: NSObject {
     }
     
     func registerPlayerItemEvent() {
-        let options = NSKeyValueObservingOptions.Old | NSKeyValueObservingOptions.New
+        let options = NSKeyValueObservingOptions([.Old, .New])
         
         playerItem!.addObserver(self, forKeyPath:kStatusKey, options:options, context: UnsafeMutablePointer<Void>(unsafeAddressOf(kStatusKey)))
         keyobserver.status = true
@@ -492,7 +492,7 @@ public class CorePlayer: NSObject {
     }
     
     func registerPlayerEvent() {
-        let options = NSKeyValueObservingOptions.Old | NSKeyValueObservingOptions.New
+        let options = NSKeyValueObservingOptions([.Old, .New])
         
         player!.addObserver(self, forKeyPath:kRateKey, options:options, context:nil)
         keyobserver.rate = true
@@ -560,16 +560,15 @@ public class CorePlayer: NSObject {
             backView!.playerLayer().player = backPlayer
         }
     }
-    
-    override public func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        
+
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == kPlaybackKeepUpKey {
             if playerstate.state == .AssetReady ||
                playerstate.state == .ItemReady {
                 return
             }
-            
-            let keep = (change[NSKeyValueChangeNewKey] as! NSNumber).boolValue
+
+            let keep = (change?[NSKeyValueChangeNewKey] as! NSNumber).boolValue
             
             if keep {
                 stopPending()
@@ -580,7 +579,7 @@ public class CorePlayer: NSObject {
             playerstate.pending = !keep
             
         } else if keyPath == kRateKey {
-            let rate = (change[NSKeyValueChangeNewKey] as! NSNumber).floatValue
+            let rate = (change?[NSKeyValueChangeNewKey] as! NSNumber).floatValue
             let isPlay = CPPlayer.isRatePlaying(rate)
             
             if isPlay {
@@ -615,7 +614,7 @@ public class CorePlayer: NSObject {
             }
             
         } else if keyPath == kStatusKey {
-            let status = AVPlayerStatus(rawValue: (change[NSKeyValueChangeNewKey] as! NSNumber).integerValue)!
+            let status = AVPlayerStatus(rawValue: (change?[NSKeyValueChangeNewKey] as! NSNumber).integerValue)!
             switch (status) {
             case .ReadyToPlay:
                 if playerstate.state.rawValue >= CPState.PlayReady.rawValue {
@@ -652,14 +651,14 @@ public class CorePlayer: NSObject {
             
         } else if keyPath == kPresentationSizeKey {
             #if os(iOS)
-                cpmoduleManager.presentationSize((change[NSKeyValueChangeNewKey] as! NSValue).CGSizeValue())
+                cpmoduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).CGSizeValue())
             #else
-                cpmoduleManager.presentationSize((change[NSKeyValueChangeNewKey] as! NSValue).sizeValue)
+                cpmoduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).sizeValue)
             #endif
         } else {
             #if os(iOS)
             if keyPath == player!.airPlayObserverKey() {
-                playerstate.airplay = (change[NSKeyValueChangeNewKey] as! NSNumber).boolValue
+                playerstate.airplay = (change?[NSKeyValueChangeNewKey] as! NSNumber).boolValue
                 cpmoduleManager.airplayShift(playerstate.airplay)
                 return
             }
@@ -672,8 +671,8 @@ public class CorePlayer: NSObject {
 extension CorePlayer: CPContentLayoutManager {
 
     func contentsLayout(view: UXView) {
-        let v: UXView = view.subviews[0] as! UXView
-        
+        let v: UXView = view.subviews[0]
+
         if v.isMemberOfClass(CPPlayerView) {
             v.frame = view.bounds
         }
@@ -683,19 +682,19 @@ extension CorePlayer: CPContentLayoutManager {
     
     #if os(iOS)
     
-    func contentsTouchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func contentsTouchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
         cpmoduleManager.touchesBegan(touches, withEvent: event)
     }
     
-    func contentsTouchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func contentsTouchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
         cpmoduleManager.touchesMoved(touches, withEvent: event)
     }
     
-    func contentsTouchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func contentsTouchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
         cpmoduleManager.touchesEnded(touches, withEvent: event)
     }
     
-    func contentsTouchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+    func contentsTouchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
         cpmoduleManager.touchesCancelled(touches, withEvent: event)
     }
     
@@ -825,7 +824,7 @@ extension CorePlayer: CorePlayerFeature {
         self.cpus = cpus
         playerstate.state = .ItemReady
         playerAsset = AVURLAsset.urlAssetWithURL(cpu().url, userAgent: cpu().ua) as? AVURLAsset
-        playerItem = CPPlayerItem(asset: playerAsset)
+        playerItem = CPPlayerItem(asset: playerAsset!)
         
         registerPlayerItemEvent()
         
@@ -848,7 +847,7 @@ extension CorePlayer: CorePlayerFeature {
     
     public func appendURLs(cpus: Array<CPUrl>) {
         
-        self.cpus.extend(cpus)
+        self.cpus.appendContentsOf(cpus)
         
         loadNext()
     }
@@ -905,8 +904,8 @@ extension CorePlayer: CorePlayerFeature {
     }
 
     public func presentationSize() -> CGSize {
-        if player != nil {
-            return player!.currentItem.presentationSize
+        if player != nil && player!.currentItem != nil {
+            return player!.currentItem!.presentationSize
         }
         
         return CGSizeZero

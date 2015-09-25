@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         corePlayer!.moduleManager().initModules([ModuleView.self])
         
         corePlayer!.view().frame = self.view.bounds
-        corePlayer!.view().autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        corePlayer!.view().autoresizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
         view.addSubview(corePlayer!.view())
       
         corePlayer!.playURL(NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!)

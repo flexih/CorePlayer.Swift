@@ -11,10 +11,6 @@ import AVFoundation
 
 extension AVURLAsset {
     class func urlAssetWithURL(URL: NSURL!, userAgent: NSString?) -> AnyObject! {
-        if let ua = userAgent {
-            return AVURLAsset(URL: URL, options: ["User-Agent" : ua])
-        } else {
-            return AVURLAsset.assetWithURL(URL)
-        }
+        return AVURLAsset(URL: URL, options: userAgent != nil ? ["User-Agent" : userAgent!] : nil)
     }
 }

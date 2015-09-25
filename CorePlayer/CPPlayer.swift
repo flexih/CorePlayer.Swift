@@ -28,7 +28,7 @@ class CPPlayer: AVPlayer {
         
         addObserver(observer,
             forKeyPath: key,
-            options: NSKeyValueObservingOptions.Old | NSKeyValueObservingOptions.New,
+            options: NSKeyValueObservingOptions.Old.union(NSKeyValueObservingOptions.New),
             context: nil)
         
         return true
@@ -52,7 +52,9 @@ class CPPlayer: AVPlayer {
     
     func isPlayToEnd() -> Bool {
         let played: CMTime = currentTime()
-        let duration: CMTime = currentItem.duration
+        guard let duration: CMTime = currentItem?.duration else {
+            return false
+        }
         
         var played_sec: Float64  = CMTimeGetSeconds(played)
         var duration_sec: Float64  = CMTimeGetSeconds(duration)
@@ -68,10 +70,14 @@ class CPPlayer: AVPlayer {
     }
     
     func seekToTime(time: CMTime, accurate: Bool, completion: ((Bool) -> Void)?) {
-        if accurate {
-            seekToTime(time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: completion)
+        if completion != nil {
+            if accurate {
+                seekToTime(time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: completion!)
+            } else {
+                seekToTime(time, completionHandler: completion!)
+            }
         } else {
-            seekToTime(time, completionHandler: completion)
+            seekToTime(time)
         }
     }
     

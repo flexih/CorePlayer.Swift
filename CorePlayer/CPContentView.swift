@@ -17,10 +17,10 @@ protocol CPContentLayoutManager: NSObjectProtocol {
     func contentsLayout(view: UXView)
     
     #if os(iOS)
-    func contentsTouchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    func contentsTouchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
-    func contentsTouchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
-    func contentsTouchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!)
+    func contentsTouchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?)
+    func contentsTouchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?)
+    func contentsTouchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?)
+    func contentsTouchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?)
     #else
     func contentsMouseDown(theEvent: NSEvent)
     func contentsRightMouseDown(theEvent: NSEvent)
@@ -49,22 +49,23 @@ class CPContentView: UXView {
         super.layoutSubviews()
         layoutManager?.contentsLayout(self)
     }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         layoutManager?.contentsTouchesBegan(touches, withEvent: event)
     }
-    
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         layoutManager?.contentsTouchesMoved(touches, withEvent: event)
     }
-    
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         layoutManager?.contentsTouchesEnded(touches, withEvent: event)
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         layoutManager?.contentsTouchesCancelled(touches, withEvent: event)
     }
+    
     #else
     override func resizeSubviewsWithOldSize(oldSize: NSSize) {
         super.resizeSubviewsWithOldSize(oldSize)

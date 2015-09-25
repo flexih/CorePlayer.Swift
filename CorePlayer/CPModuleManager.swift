@@ -45,9 +45,9 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         var newModules: Array<CPModuleDelegate> = []
         
         for mclass in moduleClasses {
-            if let ctype: AnyObject.Type = mclass as? AnyClass {
+            if let ctype: AnyObject.Type = mclass as AnyClass {
                 let otype: NSObject.Type = ctype as! NSObject.Type
-                var module: CPModuleDelegate? = otype() as? CPModuleDelegate
+                let module: CPModuleDelegate? = otype.init() as? CPModuleDelegate
                 if module != nil {
                     registerModule(module!)
                     newModules.append(module!)
@@ -64,7 +64,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     }
     
     func sortModules(inout modules: Array<CPModuleDelegate>) {
-        modules.sort { (objc1, objc2) -> Bool in
+        modules.sortInPlace { (objc1, objc2) -> Bool in
             let type1 = (objc1.moduleType() as ModuleType).rawValue
             let type2 = (objc2.moduleType() as ModuleType).rawValue
             
@@ -92,8 +92,8 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func delModules(moduleClasses: Array<CPModuleDelegate.Type>) {
         for mclass in moduleClasses {
-            for (i, module) in enumerate(modules) {
-                if module.isMemberOfClass(mclass as! AnyClass) {
+            for (i, module) in modules.enumerate() {
+                if module.isMemberOfClass(mclass as AnyClass) {
                     if module.moduleType() == .View {
                         (module as! UXView).removeFromSuperview()
                     }
@@ -108,7 +108,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func moduleWithClass(moduleClass: CPModuleDelegate.Type) -> CPModuleDelegate? {
         for module in modules {
-            if module.isMemberOfClass(moduleClass as! AnyClass) {
+            if module.isMemberOfClass(moduleClass as AnyClass) {
                 return module
             }
         }
@@ -314,19 +314,19 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     #if os(iOS)
     
-    func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+    func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
         
     }
     
