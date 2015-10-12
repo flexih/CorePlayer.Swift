@@ -1,7 +1,7 @@
 # CorePlayer.Swift
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flexih/CorePlayer.Swift/blob/master/LICENSE)
 
-A iOS and OSX media player framework based on AVPlayer.
+A iOS and OSX media player framework based on AVPlayer. Make your player UI and logic quickly and easily.
 
 ## Requirements
 - iOS 7.0+
