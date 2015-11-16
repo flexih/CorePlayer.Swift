@@ -27,6 +27,7 @@
 		71AF8A671ADD3DBD00228A3D /* CPModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A661ADD3DBD00228A3D /* CPModuleDelegate.swift */; };
 		71AF8A691ADD455100228A3D /* CPUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A681ADD455100228A3D /* CPUrl.swift */; };
 		71AF8A6B1ADD4A4200228A3D /* CPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A6A1ADD4A4200228A3D /* CPPlayerView.swift */; };
+		71C022611BF9DF4600AC8CCD /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C022601BF9DF4600AC8CCD /* ProgressView.swift */; };
 		71D0F67E1AEF25E700CB7B2D /* ModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D0F67D1AEF25E700CB7B2D /* ModuleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		71AF8A661ADD3DBD00228A3D /* CPModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModuleDelegate.swift; sourceTree = "<group>"; };
 		71AF8A681ADD455100228A3D /* CPUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPUrl.swift; sourceTree = "<group>"; };
 		71AF8A6A1ADD4A4200228A3D /* CPPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayerView.swift; sourceTree = "<group>"; };
+		71C022601BF9DF4600AC8CCD /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		71D0F67D1AEF25E700CB7B2D /* ModuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				71AF8A411ADD38D200228A3D /* AppDelegate.swift */,
 				71AF8A431ADD38D200228A3D /* ViewController.swift */,
 				71D0F67D1AEF25E700CB7B2D /* ModuleView.swift */,
+				71C022601BF9DF4600AC8CCD /* ProgressView.swift */,
 				71AF8A451ADD38D200228A3D /* Main.storyboard */,
 				71AF8A481ADD38D200228A3D /* Images.xcassets */,
 				71AF8A4A1ADD38D200228A3D /* LaunchScreen.xib */,
@@ -307,6 +310,7 @@
 				71AF8A6B1ADD4A4200228A3D /* CPPlayerView.swift in Sources */,
 				71AF8A691ADD455100228A3D /* CPUrl.swift in Sources */,
 				7119DD041AE5C07800185672 /* CPContentView.swift in Sources */,
+				71C022611BF9DF4600AC8CCD /* ProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

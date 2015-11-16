@@ -201,7 +201,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    public func endPlayCode(errCode: NSInteger) {
+    public func endPlayCode(errCode: Int) {
         for module in modules {
             if module.respondsToSelector("endPlayCode:") {
                 module.endPlayCode!(errCode)
@@ -288,7 +288,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    public func error(err: NSInteger) {
+    public func error(err: Int) {
         for module in modules {
             if module.respondsToSelector("error:") {
                 module.error!(err)

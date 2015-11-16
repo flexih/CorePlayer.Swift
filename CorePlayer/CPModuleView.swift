@@ -24,7 +24,7 @@ public class CPModuleView: UXView, CPModuleViewDelegate {
         return .View
     }
     
-    public func viewIndex() -> NSInteger {
+    public func viewIndex() -> Int {
         return 0
     }
     

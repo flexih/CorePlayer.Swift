@@ -10,7 +10,7 @@ import Foundation
 
 @objc public protocol CPModuleViewDelegate: CPModuleDelegate {
     
-    func viewIndex() -> NSInteger
+    func viewIndex() -> Int
     func layoutView()
     func willShow()
     func willHide()

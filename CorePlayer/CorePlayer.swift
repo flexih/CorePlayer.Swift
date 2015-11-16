@@ -35,7 +35,7 @@ public class CorePlayer: NSObject {
     var backView: CPPlayerView?
     var playedObserver: AnyObject?
     var cpus: Array<CPUrl> = []
-    var cpi: NSInteger = 0
+    var cpi: Int = 0
     var player: CPPlayer? {
         willSet {
             if player != nil {
@@ -161,7 +161,7 @@ public class CorePlayer: NSObject {
         return 0
     }
     
-    public func durationSpan() -> NSInteger {
+    public func durationSpan() -> Int {
         return 1
     }
     
@@ -290,7 +290,7 @@ public class CorePlayer: NSObject {
             playerstate.state == .Failed   ||
             playerstate.state == .Stop {
                 cpmoduleManager.endSection(cpu())
-                cpmoduleManager.endPlayCode(NSInteger(playerstate.state.rawValue))
+                cpmoduleManager.endPlayCode(Int(playerstate.state.rawValue))
                 #if os(iOS)
                 interruption.unobserver()
                 #endif

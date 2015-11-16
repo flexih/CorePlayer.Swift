@@ -29,12 +29,16 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 ```
 corePlayer = CorePlayer()
 corePlayer!.moduleManager()?.initModules([ModuleView.self])
-
 corePlayer!.view().frame = self.view.bounds
 view.addSubview(corePlayer!.view())
 
 corePlayer!.playURL(URL)
 ```
+
+## Snapshot
+![](snapshot/shot2.png "")
+
+![](snapshot/shot1.png "")
 
 ## License
 

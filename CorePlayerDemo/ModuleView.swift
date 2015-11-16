@@ -10,7 +10,7 @@ import UIKit
 
 class ModuleView: CPModuleView {
     
-    var button = UIButton()
+    let button = UIButton()
     
     func willPlay() {
         NSLog("willplay")
