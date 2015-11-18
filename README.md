@@ -13,7 +13,7 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 
 ## How To Get Started
 - Just compile source files
-- Or make it a framework by yourself
+- pod 'CorePlayer'
 
 
 ## Architecture
