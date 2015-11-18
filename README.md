@@ -9,6 +9,7 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 ## Requirements
 - iOS 7.0+
 - OSX 10.7+
+- Xcode 7.0+
 
 ## How To Get Started
 - Just compile source files
