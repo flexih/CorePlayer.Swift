@@ -10,7 +10,9 @@ import Foundation
 import AVFoundation
 
 extension AVURLAsset {
-    class func urlAssetWithURL(URL: NSURL!, userAgent: NSString?) -> AnyObject! {
-        return AVURLAsset(URL: URL, options: userAgent != nil ? ["User-Agent" : userAgent!] : nil)
+    
+    convenience init(URL: NSURL, userAgent UA: String?) {
+        self.init(URL: URL, options: UA.map{["User-Agent": $0]})
     }
+    
 }

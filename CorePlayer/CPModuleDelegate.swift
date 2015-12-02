@@ -13,15 +13,15 @@
 #endif
 
 @objc public enum ModuleType: Int {
-    case Feature = 1,
-         View
+    case Feature = 1
+    case View
 }
 
 @objc public enum InterruptionReason: Int {
-    case NewDeviceAvailable = 1,
-         OldDeviceUnavailable,
-         AudioSessionBegan,
-         AudioSessionEnd
+    case NewDeviceAvailable = 1
+    case OldDeviceUnavailable
+    case AudioSessionBegan
+    case AudioSessionEnd
 }
 
 @objc public protocol CPModuleDelegate: NSObjectProtocol {

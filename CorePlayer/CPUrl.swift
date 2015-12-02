@@ -10,7 +10,7 @@ import Foundation
 
 public class CPUrl: NSObject {
     public var url: NSURL!
-    public var ua: NSString?
+    public var ua: String?
     public var from: Double = 0
     
     init!(url: NSURL!, from: Double) {

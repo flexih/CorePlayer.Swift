@@ -9,24 +9,24 @@
 import AVFoundation
 
 @objc public enum CPState: Int {
-    case None = 0,
-         AssetReady,
-         ItemReady,
-         PlayReady,
-         End,
-         Failed,
-         Error,
-         Stop
+    case None
+    case AssetReady
+    case ItemReady
+    case PlayReady
+    case End
+    case Failed
+    case Error
+    case Stop
 }
 
 public enum CPError: Int {
-    case URLError = -1000,
-         Error
+    case URLError = -1000
+    case Error
 }
 
 @objc public protocol CorePlayerFeature: NSObjectProtocol {
     
-    var scaleFill: Bool { get set}
+    var scaleFill: Bool { get set }
     #if os(iOS)
     var allowAirPlay: Bool { get set }
     #endif

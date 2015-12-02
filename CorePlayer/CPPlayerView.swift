@@ -14,8 +14,8 @@ import AVFoundation
 #endif
 
 enum VideoGravity: Int {
-    case Aspect = 1,
-         Fill
+    case Aspect = 1
+    case Fill
 }
 
 class CPPlayerView: UXView {

@@ -47,8 +47,8 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         for mclass in moduleClasses {
             if let ctype: AnyObject.Type = mclass as AnyClass {
                 let otype: NSObject.Type = ctype as! NSObject.Type
-                let module: CPModuleDelegate? = otype.init() as? CPModuleDelegate
-                if module != nil {
+                
+                if let module: CPModuleDelegate? = otype.init() as? CPModuleDelegate {
                     registerModule(module!)
                     newModules.append(module!)
                 }
@@ -64,7 +64,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     }
     
     func sortModules(inout modules: Array<CPModuleDelegate>) {
-        modules.sortInPlace { (objc1, objc2) -> Bool in
+        modules.sortInPlace { objc1, objc2 in
             let type1 = (objc1.moduleType() as ModuleType).rawValue
             let type2 = (objc2.moduleType() as ModuleType).rawValue
             

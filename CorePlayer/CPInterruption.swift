@@ -45,11 +45,11 @@ class CPInterruption: NSObject {
     }
     
     func beginInterrupt() {
-        delegate?.interrupt(InterruptionReason.AudioSessionBegan)
+        delegate?.interrupt(.AudioSessionBegan)
     }
     
     func endInterrupt() {
-        delegate?.interrupt(InterruptionReason.AudioSessionEnd)
+        delegate?.interrupt(.AudioSessionEnd)
     }
 }
 

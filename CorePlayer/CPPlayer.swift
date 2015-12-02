@@ -26,10 +26,7 @@ class CPPlayer: AVPlayer {
             return false
         }
         
-        addObserver(observer,
-            forKeyPath: key,
-            options: NSKeyValueObservingOptions.Old.union(NSKeyValueObservingOptions.New),
-            context: nil)
+        addObserver(observer, forKeyPath: key, options: [.Old, .New], context: nil)
         
         return true
     }
