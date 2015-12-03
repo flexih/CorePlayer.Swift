@@ -61,7 +61,7 @@ public class CorePlayer: NSObject {
     var backPlayer: CPPlayer?
     var backView: CPPlayerView?
     var playedObserver: AnyObject?
-    var cpus: Array<CPUrl> = []
+    var cpus: Array<CPURL> = []
     var cpi: Int = 0
     var player: CPPlayer? {
         willSet {
@@ -211,12 +211,12 @@ public class CorePlayer: NSObject {
     }
     
     func startLoading() {
-        cpmoduleManager.willSection(cpu())
+        cpmoduleManager.willSection(cpu()!)
         cpmoduleManager.willPlay()
     }
     
     func stopLoading() {
-        cpmoduleManager.startSection(cpu())
+        cpmoduleManager.startSection(cpu()!)
         
         if cpi == 0 {
             cpmoduleManager.startPlay()
@@ -285,7 +285,7 @@ public class CorePlayer: NSObject {
            playerstate.state == .End       ||
            playerstate.state == .Failed    ||
            playerstate.state == .Stop {
-                cpmoduleManager.endSection(cpu())
+                cpmoduleManager.endSection(cpu()!)
                 cpmoduleManager.endPlayCode(Int(playerstate.state.rawValue))
                 #if os(iOS)
                 interruption.unobserver()
@@ -337,12 +337,12 @@ public class CorePlayer: NSObject {
             playerstate.readyplay = false
             
             playerstate.state = .End
-            cpmoduleManager.endSection(cpu())
+            cpmoduleManager.endSection(cpu()!)
             
             cpi += 1
             playerstate.state = .ItemReady
             
-            cpmoduleManager.willSection(cpu())
+            cpmoduleManager.willSection(cpu()!)
             
             playerItem = backPlayer?.currentItem as? CPPlayerItem
             playerAsset = playerItem?.asset as? AVURLAsset
@@ -397,10 +397,10 @@ public class CorePlayer: NSObject {
         playerstate.state = .PlayReady
         stopLoading()
         
-        if cpu().from > 0.0 {
+        if cpu()!.from > 0.0 {
             playerstate.seekhead = true
             
-            player?.seekToTime(CMTimeMakeWithSeconds(Float64(cpu().from), Int32(NSEC_PER_SEC)), accurate: true, completion: { [weak self] finished in
+            player?.seekToTime(CMTimeMakeWithSeconds(Float64(cpu()!.from), Int32(NSEC_PER_SEC)), accurate: true, completion: { [weak self] finished in
                 if let strongSelf = self {
                     strongSelf.playerstate.seekhead = false
                     
@@ -410,7 +410,7 @@ public class CorePlayer: NSObject {
                 }
             })
             
-            cpu().from = 0.0
+            cpu()!.from = 0.0
         }
         
         var active = true
@@ -545,7 +545,7 @@ public class CorePlayer: NSObject {
         
         if cpi + 1 < cpus.count {
             let cpu = cpus[cpi + 1]
-            let asset = AVURLAsset(URL: cpu.url, userAgent: cpu.ua)
+            let asset = AVURLAsset(URL: cpu.URL, userAgent: cpu.UA)
             let playerItem = CPPlayerItem(asset: asset)
             
             backPlayer = CPPlayer(playerItem: playerItem)
@@ -801,11 +801,11 @@ extension CorePlayer: CorePlayerFeature {
     }
     #endif
 
-    public func playURL(url: NSURL) {
-        playURLs([CPUrl(url: url)])
+    public func play(URL URL: NSURL) {
+        play(URLs: [CPURL(URL: URL)])
     }
     
-    public func playURLs(cpus: Array<CPUrl>) {
+    public func play(URLs cpus: Array<CPURL>) {
         if playerstate.state == .PlayReady ||
            playerstate.state == .ItemReady ||
            playerstate.state == .AssetReady {
@@ -820,7 +820,7 @@ extension CorePlayer: CorePlayerFeature {
         cpi = 0
         self.cpus = cpus
         playerstate.state = .ItemReady
-        playerAsset = AVURLAsset(URL: cpu().url, userAgent: cpu().ua)
+        playerAsset = AVURLAsset(URL: cpu()!.URL, userAgent: cpu()!.UA)
         playerItem = CPPlayerItem(asset: playerAsset!)
         
         registerPlayerItemEvent()
@@ -838,11 +838,11 @@ extension CorePlayer: CorePlayerFeature {
         loadNext()
     }
 
-    public func appendURL(url: NSURL) {
-        appendURLs([CPUrl(url: url)])
+    public func append(URL URL: NSURL) {
+        append(URLs: [CPURL(URL: URL)])
     }
     
-    public func appendURLs(cpus: Array<CPUrl>) {
+    public func append(URLs cpus: Array<CPURL>) {
         
         self.cpus.appendContentsOf(cpus)
         
@@ -865,7 +865,7 @@ extension CorePlayer: CorePlayerFeature {
         return cpplayerView
     }
 
-    public func cpu() -> CPUrl {
+    public func cpu() -> CPURL? {
         return cpus[cpi]
     }
 

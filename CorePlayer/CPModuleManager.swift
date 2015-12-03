@@ -208,7 +208,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
             }
         }
     }
-    public func endSection(cp: CPUrl) {
+    public func endSection(cp: CPURL) {
         for module in modules {
             if module.respondsToSelector("endSection:") {
                 module.endSection!(cp)
@@ -216,7 +216,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    public func startSection(cp: CPUrl) {
+    public func startSection(cp: CPURL) {
         for module in modules {
             if module.respondsToSelector("startSection:") {
                 module.startSection!(cp)
@@ -224,7 +224,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    public func willSection(cp: CPUrl) {
+    public func willSection(cp: CPURL) {
         for module in modules {
             if module.respondsToSelector("willSection:") {
                 module.willSection!(cp)
