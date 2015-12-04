@@ -1,5 +1,5 @@
 # CorePlayer.Swift
-![pod](https://img.shields.io/badge/pod-v1.0-green.svg)
+![pod](https://img.shields.io/badge/pod-v1.6-green.svg)
 ![platform](https://img.shields.io/badge/platform-ios%20%7C%20osx-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flexih/CorePlayer.Swift/blob/master/LICENSE)
 [![weibo](https://img.shields.io/badge/weibo-%40flexih-yellow.svg)](http://weibo.com/flexih)
