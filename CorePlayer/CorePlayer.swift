@@ -79,7 +79,7 @@ public class CorePlayer: NSObject {
     var interruption: CPInterruption
     #endif
     
-    init(moduleManager: CPModuleManager) {
+    public init(moduleManager: CPModuleManager) {
         cpview = CPContentView()
         cpplayerView = CPPlayerView()
         cpmoduleManager = moduleManager
@@ -104,7 +104,7 @@ public class CorePlayer: NSObject {
         #endif
     }
     
-    override convenience init() {
+    public override convenience init() {
         self.init(moduleManager: CPModuleManager())
     }
     
