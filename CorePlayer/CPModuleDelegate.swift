@@ -36,7 +36,7 @@
     optional func willPlay()
     optional func startPlay()
     optional func cancelPlay()
-    optional func endPlayCode(errCode: Int)
+    optional func endPlayCode(state: CPState)
     
     optional func willSection(cpu: CPUrl)
     optional func startSection(cpu: CPUrl)
@@ -61,5 +61,5 @@
     optional func presentationSize(size: CGSize)
     optional func airplayShift(on: Bool)
     optional func interrupt(reason: InterruptionReason)
-    optional func error(err: Int)
+    optional func error(err: Int)/*CPError*/
 }

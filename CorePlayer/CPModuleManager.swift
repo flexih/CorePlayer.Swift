@@ -201,10 +201,10 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    public func endPlayCode(errCode: Int) {
+    public func endPlayCode(state: CPState) {
         for module in modules {
             if module.respondsToSelector("endPlayCode:") {
-                module.endPlayCode!(errCode)
+                module.endPlayCode!(state)
             }
         }
     }

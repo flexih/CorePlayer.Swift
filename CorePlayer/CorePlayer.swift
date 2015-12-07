@@ -39,7 +39,7 @@ public class CorePlayer: NSObject {
     }
     
     struct Playerstate {
-        var state = CPState.None
+        var state:CPState = .None
         var lastplay = false
         var seeking = false
         var play = false
@@ -165,8 +165,8 @@ public class CorePlayer: NSObject {
         
     }
     
-    public func handleError(error: Int) {
-        cpmoduleManager.error(error)
+    public func handleError(error: CPError) {
+        cpmoduleManager.error(error.rawValue)
     }
     
     public func stop() {
@@ -286,7 +286,7 @@ public class CorePlayer: NSObject {
            playerstate.state == .Failed    ||
            playerstate.state == .Stop {
                 cpmoduleManager.endSection(cpu())
-                cpmoduleManager.endPlayCode(Int(playerstate.state.rawValue))
+                cpmoduleManager.endPlayCode(playerstate.state)
                 #if os(iOS)
                 interruption.unobserver()
                 #endif
@@ -315,7 +315,7 @@ public class CorePlayer: NSObject {
             stopPlaybackSession()
             
             if playerstate.state == .Failed {
-                handleError(CPError.Error.rawValue)
+                handleError(.Error)
             } else {
                 handlePlayEnd()
             }
@@ -636,7 +636,7 @@ public class CorePlayer: NSObject {
                 }
                 
                 stopPlaybackSession()
-                handleError(CPError.Error.rawValue)
+                handleError(.Error)
             }
             
         } else if keyPath == kDurationKey {
@@ -813,7 +813,7 @@ extension CorePlayer: CorePlayerFeature {
         }
         
         if cpus.count == 0 {
-            handleError(CPError.URLError.rawValue)
+            handleError(.URLError)
             return
         }
         

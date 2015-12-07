@@ -57,7 +57,7 @@ class ModuleView: CPModuleView {
         NSLog("cancelPlay")
     }
     
-    func endPlayCode(errCode: Int) {
+    func endPlayCode(state: CPState) {
         NSLog("endPlayCode")
     }
     
