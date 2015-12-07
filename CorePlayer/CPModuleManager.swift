@@ -288,7 +288,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    public func error(err: Int) {
+    public func error(err: CPError) {
         for module in modules {
             if module.respondsToSelector("error:") {
                 module.error!(err)

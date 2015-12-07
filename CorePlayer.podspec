@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name = 'CorePlayer'
-  s.version = '1.7.2'
+  s.version = '1.7.3'
   s.license = 'MIT'
   s.summary = 'A elegant iOS and OSX media player framework based on AVPlayer.'
   s.homepage = 'https://github.com/flexih/CorePlayer.Swift'

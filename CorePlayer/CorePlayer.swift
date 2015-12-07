@@ -166,7 +166,7 @@ public class CorePlayer: NSObject {
     }
     
     public func handleError(error: CPError) {
-        cpmoduleManager.error(error.rawValue)
+        cpmoduleManager.error(error)
     }
     
     public func stop() {

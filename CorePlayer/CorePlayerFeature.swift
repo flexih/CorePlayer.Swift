@@ -19,7 +19,7 @@ import AVFoundation
     case Stop
 }
 
-public enum CPError: Int {
+@objc public enum CPError: Int {
     case URLError = -1000
     case Error
 }

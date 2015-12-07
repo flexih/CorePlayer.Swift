@@ -61,5 +61,5 @@
     optional func presentationSize(size: CGSize)
     optional func airplayShift(on: Bool)
     optional func interrupt(reason: InterruptionReason)
-    optional func error(err: Int)/*CPError*/
+    optional func error(err: CPError)/*CPError*/
 }
