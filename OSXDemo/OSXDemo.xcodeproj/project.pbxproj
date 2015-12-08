@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7125436B1C171AB20067C83F /* EventModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125436A1C171AB20067C83F /* EventModule.swift */; };
 		71FB5B4E1C16C64200C9E45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */; };
 		71FB5B501C16C64200C9E45D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4F1C16C64200C9E45D /* ViewController.swift */; };
 		71FB5B521C16C64200C9E45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5B511C16C64200C9E45D /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7125436A1C171AB20067C83F /* EventModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModule.swift; sourceTree = "<group>"; };
 		71FB5B4A1C16C64200C9E45D /* OSXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSXDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71FB5B4F1C16C64200C9E45D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				71FB5B781C16C65800C9E45D /* CorePlayer */,
 				71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */,
+				7125436A1C171AB20067C83F /* EventModule.swift */,
 				71FB5B4F1C16C64200C9E45D /* ViewController.swift */,
 				71FB5B511C16C64200C9E45D /* Assets.xcassets */,
 				71FB5B531C16C64200C9E45D /* Main.storyboard */,
@@ -309,6 +312,7 @@
 				71FB5B8D1C16C65800C9E45D /* CPModuleDelegate.swift in Sources */,
 				71FB5B891C16C65800C9E45D /* CorePlayerFeature.swift in Sources */,
 				71FB5B8C1C16C65800C9E45D /* CPModule.swift in Sources */,
+				7125436B1C171AB20067C83F /* EventModule.swift in Sources */,
 				71FB5B8F1C16C65800C9E45D /* CPModuleView.swift in Sources */,
 				71FB5B8E1C16C65800C9E45D /* CPModuleManager.swift in Sources */,
 				71FB5B8B1C16C65800C9E45D /* CPInterruption.swift in Sources */,
@@ -540,6 +544,7 @@
 				71FB5B711C16C64200C9E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71FB5B721C16C64200C9E45D /* Build configuration list for PBXNativeTarget "OSXDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +553,7 @@
 				71FB5B741C16C64200C9E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71FB5B751C16C64200C9E45D /* Build configuration list for PBXNativeTarget "OSXDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +562,7 @@
 				71FB5B771C16C64200C9E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
