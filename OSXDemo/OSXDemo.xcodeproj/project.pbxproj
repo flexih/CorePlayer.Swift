@@ -540,6 +540,7 @@
 				71FB5B711C16C64200C9E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71FB5B721C16C64200C9E45D /* Build configuration list for PBXNativeTarget "OSXDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +549,7 @@
 				71FB5B741C16C64200C9E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71FB5B751C16C64200C9E45D /* Build configuration list for PBXNativeTarget "OSXDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +558,7 @@
 				71FB5B771C16C64200C9E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
