@@ -61,7 +61,7 @@ public class CorePlayer: NSObject {
     var backPlayer: CPPlayer?
     var backView: CPPlayerView?
     var playedObserver: AnyObject?
-    var cpus: Array<CPUrl> = []
+    var cpus: Array<CPURL> = []
     var cpi: Int = 0
     var player: CPPlayer? {
         willSet {
@@ -545,7 +545,7 @@ public class CorePlayer: NSObject {
         
         if cpi + 1 < cpus.count {
             let cpu = cpus[cpi + 1]
-            let asset = AVURLAsset(URL: cpu.url, userAgent: cpu.ua)
+            let asset = AVURLAsset(URL: cpu.URL, userAgent: cpu.UA)
             let playerItem = CPPlayerItem(asset: asset)
             
             backPlayer = CPPlayer(playerItem: playerItem)
@@ -801,11 +801,11 @@ extension CorePlayer: CorePlayerFeature {
     }
     #endif
 
-    public func playURL(url: NSURL) {
-        playURLs([CPUrl(url: url)])
+    public func playURL(URL: NSURL) {
+        playURLs([CPURL(URL: URL)])
     }
     
-    public func playURLs(cpus: Array<CPUrl>) {
+    public func playURLs(cpus: Array<CPURL>) {
         if playerstate.state == .PlayReady ||
            playerstate.state == .ItemReady ||
            playerstate.state == .AssetReady {
@@ -820,7 +820,7 @@ extension CorePlayer: CorePlayerFeature {
         cpi = 0
         self.cpus = cpus
         playerstate.state = .ItemReady
-        playerAsset = AVURLAsset(URL: cpu().url, userAgent: cpu().ua)
+        playerAsset = AVURLAsset(URL: cpu().URL, userAgent: cpu().UA)
         playerItem = CPPlayerItem(asset: playerAsset!)
         
         registerPlayerItemEvent()
@@ -838,11 +838,11 @@ extension CorePlayer: CorePlayerFeature {
         loadNext()
     }
 
-    public func appendURL(url: NSURL) {
-        appendURLs([CPUrl(url: url)])
+    public func appendURL(URL: NSURL) {
+        appendURLs([CPURL(URL: URL)])
     }
     
-    public func appendURLs(cpus: Array<CPUrl>) {
+    public func appendURLs(cpus: Array<CPURL>) {
         
         self.cpus.appendContentsOf(cpus)
         
@@ -865,7 +865,7 @@ extension CorePlayer: CorePlayerFeature {
         return cpplayerView
     }
 
-    public func cpu() -> CPUrl {
+    public func cpu() -> CPURL {
         return cpus[cpi]
     }
 

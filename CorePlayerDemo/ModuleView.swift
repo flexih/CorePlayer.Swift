@@ -61,15 +61,15 @@ class ModuleView: CPModuleView {
         NSLog("endPlayCode")
     }
     
-    func willSection(cpu: CPUrl) {
+    func willSection(cpu: CPURL) {
         NSLog("willSection")
     }
     
-    func startSection(cpu: CPUrl) {
+    func startSection(cpu: CPURL) {
         NSLog("startSection")
     }
     
-    func endSection(cpu: CPUrl) {
+    func endSection(cpu: CPURL) {
         NSLog("endSection")
     }
     

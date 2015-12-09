@@ -38,9 +38,9 @@
     optional func cancelPlay()
     optional func endPlayCode(state: CPState)
     
-    optional func willSection(cpu: CPUrl)
-    optional func startSection(cpu: CPUrl)
-    optional func endSection(cpu: CPUrl)
+    optional func willSection(cpu: CPURL)
+    optional func startSection(cpu: CPURL)
+    optional func endSection(cpu: CPURL)
     
     optional func willPend()
     optional func endPend()

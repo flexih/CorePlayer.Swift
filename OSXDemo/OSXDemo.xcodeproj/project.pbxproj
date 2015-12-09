@@ -27,7 +27,7 @@
 		71FB5B911C16C65800C9E45D /* CPPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B831C16C65800C9E45D /* CPPlayer.swift */; };
 		71FB5B921C16C65800C9E45D /* CPPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B841C16C65800C9E45D /* CPPlayerItem.swift */; };
 		71FB5B931C16C65800C9E45D /* CPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B851C16C65800C9E45D /* CPPlayerView.swift */; };
-		71FB5B941C16C65800C9E45D /* CPUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B861C16C65800C9E45D /* CPUrl.swift */; };
+		71FB5B941C16C65800C9E45D /* CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B861C16C65800C9E45D /* CPURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,7 @@
 		71FB5B831C16C65800C9E45D /* CPPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayer.swift; sourceTree = "<group>"; };
 		71FB5B841C16C65800C9E45D /* CPPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayerItem.swift; sourceTree = "<group>"; };
 		71FB5B851C16C65800C9E45D /* CPPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayerView.swift; sourceTree = "<group>"; };
-		71FB5B861C16C65800C9E45D /* CPUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPUrl.swift; sourceTree = "<group>"; };
+		71FB5B861C16C65800C9E45D /* CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +170,7 @@
 				71FB5B831C16C65800C9E45D /* CPPlayer.swift */,
 				71FB5B841C16C65800C9E45D /* CPPlayerItem.swift */,
 				71FB5B851C16C65800C9E45D /* CPPlayerView.swift */,
-				71FB5B861C16C65800C9E45D /* CPUrl.swift */,
+				71FB5B861C16C65800C9E45D /* CPURL.swift */,
 			);
 			name = CorePlayer;
 			path = ../../CorePlayer;
@@ -319,7 +319,7 @@
 				71FB5B881C16C65800C9E45D /* CorePlayer.swift in Sources */,
 				71FB5B931C16C65800C9E45D /* CPPlayerView.swift in Sources */,
 				71FB5B901C16C65800C9E45D /* CPModuleViewDelegate.swift in Sources */,
-				71FB5B941C16C65800C9E45D /* CPUrl.swift in Sources */,
+				71FB5B941C16C65800C9E45D /* CPURL.swift in Sources */,
 				71FB5B871C16C65800C9E45D /* AVURLAsset+UserAgent.swift in Sources */,
 				71FB5B4E1C16C64200C9E45D /* AppDelegate.swift in Sources */,
 				71FB5B8A1C16C65800C9E45D /* CPContentView.swift in Sources */,

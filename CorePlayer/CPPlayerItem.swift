@@ -11,7 +11,7 @@ import AVFoundation
 
 class CPPlayerItem: AVPlayerItem {
     
-    func url() -> NSURL {
+    func URL() -> NSURL {
         return (asset as! AVURLAsset).URL
     }
     

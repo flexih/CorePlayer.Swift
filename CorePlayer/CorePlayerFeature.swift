@@ -31,10 +31,10 @@ import AVFoundation
     var allowAirPlay: Bool { get set }
     #endif
     
-    func playURL(url: NSURL)
-    func playURLs(cpus: Array<CPUrl>)
-    func appendURLs(cpus: Array<CPUrl>)
-    func appendURL(url: NSURL)
+    func playURL(URL: NSURL)
+    func playURLs(cpus: Array<CPURL>)
+    func appendURLs(cpus: Array<CPURL>)
+    func appendURL(URL: NSURL)
     
     func avplayer() -> AVPlayer?
     func moduleManager() -> CPModuleManager
@@ -42,7 +42,7 @@ import AVFoundation
     func view() -> UXView
     func playerView() -> UXView
     
-    func cpu() -> CPUrl
+    func cpu() -> CPURL
     func duration() -> NSTimeInterval
     func played() -> NSTimeInterval
     func state() -> CPState
