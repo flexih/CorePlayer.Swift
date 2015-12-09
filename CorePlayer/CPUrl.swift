@@ -8,18 +8,18 @@
 
 import Foundation
 
-public class CPUrl: NSObject {
-    public var url: NSURL!
-    public var ua: String?
+public class CPURL: NSObject {
+    public var URL: NSURL!
+    public var UA: String?
     public var from: Double = 0
     
-    init!(url: NSURL!, from: Double) {
-        self.url = url
+    init(URL: NSURL!, from: Double) {
+        self.URL = URL
         self.from = from
     }
     
-    convenience init!(url: NSURL!) {
-        self.init(url: url, from: 0)
+    convenience init(URL: NSURL!) {
+        self.init(URL: URL, from: 0)
     }
 }
 

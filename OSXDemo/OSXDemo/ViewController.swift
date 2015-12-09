@@ -16,7 +16,8 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         view.addSubview(corePlayer.view())
-        
+
+        corePlayer.moduleManager().initModules([EventModule.self])
         corePlayer.view().translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.init(item: corePlayer.view(), attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1, constant: 0).active = true
