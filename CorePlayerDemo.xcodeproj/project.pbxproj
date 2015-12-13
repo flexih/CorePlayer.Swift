@@ -23,7 +23,7 @@
 		71AF8A491ADD38D200228A3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71AF8A481ADD38D200228A3D /* Images.xcassets */; };
 		71AF8A4C1ADD38D200228A3D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71AF8A4A1ADD38D200228A3D /* LaunchScreen.xib */; };
 		71AF8A581ADD38D200228A3D /* CorePlayerDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A571ADD38D200228A3D /* CorePlayerDemoTests.swift */; };
-		71AF8A651ADD396D00228A3D /* AVURLAsset+UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A641ADD396D00228A3D /* AVURLAsset+UserAgent.swift */; };
+		71AF8A651ADD396D00228A3D /* AVURLAsset+CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A641ADD396D00228A3D /* AVURLAsset+CPURL.swift */; };
 		71AF8A671ADD3DBD00228A3D /* CPModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A661ADD3DBD00228A3D /* CPModuleDelegate.swift */; };
 		71AF8A691ADD455100228A3D /* CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A681ADD455100228A3D /* CPURL.swift */; };
 		71AF8A6B1ADD4A4200228A3D /* CPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AF8A6A1ADD4A4200228A3D /* CPPlayerView.swift */; };
@@ -62,7 +62,7 @@
 		71AF8A511ADD38D200228A3D /* CorePlayerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CorePlayerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71AF8A561ADD38D200228A3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71AF8A571ADD38D200228A3D /* CorePlayerDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePlayerDemoTests.swift; sourceTree = "<group>"; };
-		71AF8A641ADD396D00228A3D /* AVURLAsset+UserAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVURLAsset+UserAgent.swift"; sourceTree = "<group>"; };
+		71AF8A641ADD396D00228A3D /* AVURLAsset+CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVURLAsset+CPURL.swift"; sourceTree = "<group>"; };
 		71AF8A661ADD3DBD00228A3D /* CPModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModuleDelegate.swift; sourceTree = "<group>"; };
 		71AF8A681ADD455100228A3D /* CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPURL.swift; sourceTree = "<group>"; };
 		71AF8A6A1ADD4A4200228A3D /* CPPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayerView.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		71F78ADE1AEA40CB00F8E7B3 /* CPPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				71AF8A641ADD396D00228A3D /* AVURLAsset+UserAgent.swift */,
+				71AF8A641ADD396D00228A3D /* AVURLAsset+CPURL.swift */,
 				7119DD011AE53C2100185672 /* CPInterruption.swift */,
 				7119DD031AE5C07800185672 /* CPContentView.swift */,
 				71AF8A6A1ADD4A4200228A3D /* CPPlayerView.swift */,
@@ -302,7 +302,7 @@
 				7119DCFE1AE4F50A00185672 /* CPModuleManager.swift in Sources */,
 				7119DD001AE4FD9200185672 /* CorePlayerFeature.swift in Sources */,
 				71AF8A671ADD3DBD00228A3D /* CPModuleDelegate.swift in Sources */,
-				71AF8A651ADD396D00228A3D /* AVURLAsset+UserAgent.swift in Sources */,
+				71AF8A651ADD396D00228A3D /* AVURLAsset+CPURL.swift in Sources */,
 				7119DCF81AE4ECEC00185672 /* CPModuleViewDelegate.swift in Sources */,
 				7119DD021AE53C2100185672 /* CPInterruption.swift in Sources */,
 				71AF8A421ADD38D200228A3D /* AppDelegate.swift in Sources */,

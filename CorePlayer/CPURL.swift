@@ -12,6 +12,7 @@ public class CPURL: NSObject {
     public var URL: NSURL!
     public var UA: String?
     public var from: Double = 0
+    public var HTTPHeaderFields: [String: String]?
     
     public init(URL: NSURL!, from: Double) {
         self.URL = URL

@@ -15,4 +15,12 @@ extension AVURLAsset {
         self.init(URL: URL, options: UA.map{["User-Agent": $0]})
     }
     
+    convenience init(CPU: CPURL) {
+        if let headerFields = CPU.HTTPHeaderFields {
+            self.init(URL: CPU.URL, options: ["AVURLAssetHTTPHeaderFieldsKey": headerFields])
+        } else {
+            self.init(URL: CPU.URL, userAgent: CPU.UA)
+        }
+    }
+    
 }

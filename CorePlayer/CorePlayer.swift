@@ -545,7 +545,7 @@ public class CorePlayer: NSObject {
         
         if cpi + 1 < cpus.count {
             let cpu = cpus[cpi + 1]
-            let asset = AVURLAsset(URL: cpu.URL, userAgent: cpu.UA)
+            let asset = AVURLAsset(CPU: cpu)
             let playerItem = CPPlayerItem(asset: asset)
             
             backPlayer = CPPlayer(playerItem: playerItem)
@@ -820,7 +820,7 @@ extension CorePlayer: CorePlayerFeature {
         cpi = 0
         self.cpus = cpus
         playerstate.state = .ItemReady
-        playerAsset = AVURLAsset(URL: cpu().URL, userAgent: cpu().UA)
+        playerAsset = AVURLAsset(CPU: cpu())
         playerItem = CPPlayerItem(asset: playerAsset!)
         
         registerPlayerItemEvent()
