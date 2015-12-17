@@ -11,19 +11,20 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-    var corePlayer: CorePlayer?
+    var corePlayer: CorePlayer = {
+        let cp = CorePlayer()
+        cp.moduleManager().initModules([ModuleView.self, ProgressView.self])
+        return cp
+    } ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        corePlayer = CorePlayer()
-        corePlayer!.moduleManager().initModules([ModuleView.self, ProgressView.self])
         
-        corePlayer!.view().frame = self.view.bounds
-        corePlayer!.view().autoresizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
-        view.addSubview(corePlayer!.view())
+        corePlayer.view().frame = self.view.bounds
+        corePlayer.view().autoresizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
+        view.addSubview(corePlayer.view())
       
-        corePlayer!.playURL(NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!)
+        corePlayer.playURL(NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!)
     }
     
     override func didReceiveMemoryWarning() {

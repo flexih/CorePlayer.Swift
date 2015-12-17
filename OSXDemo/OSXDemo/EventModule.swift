@@ -11,7 +11,7 @@ import Cocoa
 class EventModule: CPModule {
 
     func willPlay() {
-        print("willPlay:\(moduleDelegate?.cpu().URL)")
+        print("willPlay:\(moduleDelegate?.cpu()!.URL)")
     }
 
     func startPlay() {
@@ -34,12 +34,12 @@ class EventModule: CPModule {
         print("endPend")
     }
 
-    func error(err: CPState) {
-        print("error:\(err)")
+    func error(err: CPError) {
+        print("error:\(err.rawValue)")
     }
 
-    func endPlayCode(errCode: CPError) {
-        print("endPlayCode:\(errCode)")
+    func endPlayCode(errCode: CPState) {
+        print("endPlayCode:\(errCode.rawValue)")
     }
 
 }

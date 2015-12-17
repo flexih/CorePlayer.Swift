@@ -24,10 +24,16 @@ public class CPModuleView: UXView, CPModuleViewDelegate {
         return .View
     }
     
+    /**
+     View hierarchy of player's view
+    */
     public func viewIndex() -> Int {
         return 0
     }
     
+    /**
+     When player's view layout, do custom layout
+    */
     public func layoutView() {
         
     }

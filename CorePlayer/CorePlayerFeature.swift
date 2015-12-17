@@ -42,7 +42,7 @@ import AVFoundation
     func view() -> UXView
     func playerView() -> UXView
     
-    func cpu() -> CPURL
+    func cpu() -> CPURL?
     func duration() -> NSTimeInterval
     func played() -> NSTimeInterval
     func state() -> CPState
@@ -50,9 +50,17 @@ import AVFoundation
     
     func isPending() -> Bool
     func isSeeking() -> Bool
+    
+    /**
+     Seeking URL.from
+    */
     func isSeekHeading() -> Bool
     func isPlaying() -> Bool
     func isFinish() -> Bool
+    
+    /**
+     User pause
+    */
     func isDirectPause() -> Bool
     #if os(iOS)
     func isAirplaying() -> Bool
@@ -60,6 +68,10 @@ import AVFoundation
     
     func play()
     func pause()
+    
+    /**
+     User pause
+    */
     func dpause()
     
     func beginSeek(time: NSTimeInterval)

@@ -211,12 +211,12 @@ public class CorePlayer: NSObject {
     }
     
     func startLoading() {
-        cpmoduleManager.willSection(cpu())
+        cpmoduleManager.willSection(cpu()!)
         cpmoduleManager.willPlay()
     }
     
     func stopLoading() {
-        cpmoduleManager.startSection(cpu())
+        cpmoduleManager.startSection(cpu()!)
         
         if cpi == 0 {
             cpmoduleManager.startPlay()
@@ -285,7 +285,7 @@ public class CorePlayer: NSObject {
            playerstate.state == .End       ||
            playerstate.state == .Failed    ||
            playerstate.state == .Stop {
-                cpmoduleManager.endSection(cpu())
+                cpmoduleManager.endSection(cpu()!)
                 cpmoduleManager.endPlayCode(playerstate.state)
                 #if os(iOS)
                 interruption.unobserver()
@@ -337,12 +337,12 @@ public class CorePlayer: NSObject {
             playerstate.readyplay = false
             
             playerstate.state = .End
-            cpmoduleManager.endSection(cpu())
+            cpmoduleManager.endSection(cpu()!)
             
             cpi += 1
             playerstate.state = .ItemReady
             
-            cpmoduleManager.willSection(cpu())
+            cpmoduleManager.willSection(cpu()!)
             
             playerItem = backPlayer?.currentItem as? CPPlayerItem
             playerAsset = playerItem?.asset as? AVURLAsset
@@ -397,10 +397,10 @@ public class CorePlayer: NSObject {
         playerstate.state = .PlayReady
         stopLoading()
         
-        if cpu().from > 0.0 {
+        if cpu()!.from > 0.0 {
             playerstate.seekhead = true
             
-            player?.seekToTime(CMTimeMakeWithSeconds(Float64(cpu().from), Int32(NSEC_PER_SEC)), accurate: true, completion: { [weak self] finished in
+            player?.seekToTime(CMTimeMakeWithSeconds(Float64(cpu()!.from), Int32(NSEC_PER_SEC)), accurate: true, completion: { [weak self] finished in
                 if let strongSelf = self {
                     strongSelf.playerstate.seekhead = false
                     
@@ -410,7 +410,7 @@ public class CorePlayer: NSObject {
                 }
             })
             
-            cpu().from = 0.0
+            cpu()!.from = 0.0
         }
         
         var active = true
@@ -820,7 +820,7 @@ extension CorePlayer: CorePlayerFeature {
         cpi = 0
         self.cpus = cpus
         playerstate.state = .ItemReady
-        playerAsset = AVURLAsset(CPU: cpu())
+        playerAsset = AVURLAsset(CPU: cpu()!)
         playerItem = CPPlayerItem(asset: playerAsset!)
         
         registerPlayerItemEvent()
@@ -865,7 +865,11 @@ extension CorePlayer: CorePlayerFeature {
         return cpplayerView
     }
 
-    public func cpu() -> CPURL {
+    public func cpu() -> CPURL? {
+        if cpus.isEmpty {
+            return nil
+        }
+        
         return cpus[cpi]
     }
 
