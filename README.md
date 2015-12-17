@@ -1,5 +1,5 @@
 # CorePlayer.Swift
-![pod](https://img.shields.io/badge/pod-v1.7.4-green.svg)
+![pod](https://img.shields.io/badge/pod-v1.8-green.svg)
 ![platform](https://img.shields.io/badge/platform-ios%20%7C%20osx-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flexih/CorePlayer.Swift/blob/master/LICENSE)
 [![weibo](https://img.shields.io/badge/weibo-%40flexih-yellow.svg)](http://weibo.com/flexih)
@@ -12,8 +12,8 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 - Xcode 7.0+
 
 ## How To Get Started
-- Just compile source files
 - pod 'CorePlayer'
+- compile source files
 
 
 ## Architecture
@@ -21,9 +21,11 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 ##### `CPModuleManager`
 
 ##### `CPModule`
+- Feature module, non-view
 - Conforms `CPModuleDelegate`
 
 ##### `CPModuleView`
+- View module
 - Conforms `CPModuleViewDelegate`
 
 
@@ -32,11 +34,11 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 
 ```
 corePlayer = CorePlayer()
-corePlayer!.moduleManager()?.initModules([ModuleView.self])
-corePlayer!.view().frame = self.view.bounds
-view.addSubview(corePlayer!.view())
+corePlayer.moduleManager().initModules([ModuleView.self])
+corePlayer.view().frame = self.view.bounds
+view.addSubview(corePlayer.view())
 
-corePlayer!.playURL(URL)
+corePlayer.playURL(URL)
 ```
 
 ## Snapshot
