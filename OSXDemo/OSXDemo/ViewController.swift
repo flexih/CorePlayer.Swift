@@ -34,6 +34,8 @@ class ViewController: NSViewController {
         }
     }
 
-
+    deinit {
+        corePlayer.stop()
+    }
 }
 
