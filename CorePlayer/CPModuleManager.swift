@@ -23,7 +23,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     }
     
     var moduleIndex: Int = 0
-    var modules: Array<CPModuleDelegate> = []
+    public var modules: Array<CPModuleDelegate> = []
     
     public func initModule() {
         
