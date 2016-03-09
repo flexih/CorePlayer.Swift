@@ -7,8 +7,11 @@
 //
 
 import Cocoa
+import AVFoundation
 
 class EventModule: CPModule {
+    
+    var generator: AVAssetImageGenerator?
 
     func willPlay() {
         print("willPlay:\(moduleDelegate?.cpu()!.URL)")
@@ -16,6 +19,23 @@ class EventModule: CPModule {
 
     func startPlay() {
         print("startPlay")
+        
+        func done0(time0: CMTime, image: CGImage?, time1: CMTime, result: AVAssetImageGeneratorResult, error: NSError?) {
+            
+        }
+        
+        generator = AVAssetImageGenerator(asset: AVURLAsset(URL: NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!))
+        generator?.generateCGImagesAsynchronouslyForTimes([NSValue(CMTime: CMTimeMakeWithSeconds(Float64(5), 10))]) {
+            (time0: CMTime, image: CGImage?, time1: CMTime, result: AVAssetImageGeneratorResult, error: NSError?) in
+            print(image)
+            print(error)
+        }
+        
+        do {
+            try generator?.copyCGImageAtTime(CMTimeMakeWithSeconds(Float64(5), 10), actualTime: nil)
+        } catch {
+            
+        }
     }
 
     func willPause() {
