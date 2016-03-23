@@ -21,7 +21,7 @@ class CPInterruption: NSObject {
     func observeInterruption(delegate: CPInterruptionDelegate) {
         self.delegate = delegate
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "interrupt:", name: AVAudioSessionInterruptionNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CPInterruption.interrupt(_:)), name: AVAudioSessionInterruptionNotification, object: nil)
     }
     
     func unobserver() {

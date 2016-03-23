@@ -84,7 +84,8 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     }
     
     func registerModule(module: CPModuleDelegate) {
-        module.moduleID = moduleIndex++
+        module.moduleID = moduleIndex
+        moduleIndex += 1
         module.moduleDelegate = moduleDelegate
         module.moduleManager = self
         modules.append(module)
@@ -118,7 +119,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func willPlay() {
         for module in modules {
-            if module.respondsToSelector("willPlay") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.willPlay)) {
                 module.willPlay!()
             }
         }
@@ -126,7 +127,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func startPlay() {
         for module in modules {
-            if module.respondsToSelector("startPlay") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.startPlay)) {
                 module.startPlay!()
             }
         }
@@ -134,7 +135,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func cancelPlay() {
         for module in modules {
-            if module.respondsToSelector("cancelPlay") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.cancelPlay)) {
                 module.cancelPlay!()
             }
         }
@@ -143,7 +144,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func willPend() {
         for module in modules {
-            if module.respondsToSelector("willPend") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.willPend)) {
                 module.willPend!()
             }
         }
@@ -151,7 +152,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func endPend() {
         for module in modules {
-            if module.respondsToSelector("endPend") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.endPend)) {
                 module.endPend!()
             }
         }
@@ -159,7 +160,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func willPause() {
         for module in modules {
-            if module.respondsToSelector("willPause") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.willPause)) {
                 module.willPause!()
             }
         }
@@ -167,7 +168,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func endPause() {
         for module in modules {
-            if module.respondsToSelector("endPause") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.endPause)) {
                 module.endPause!()
             }
         }
@@ -175,7 +176,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func appResign() {
         for module in modules {
-            if module.respondsToSelector("appResign") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.appResign)) {
                 module.appResign!()
             }
         }
@@ -183,7 +184,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func appActive() {
         for module in modules {
-            if module.respondsToSelector("appActive") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.appActive)) {
                 module.appActive!()
             }
         }
@@ -194,7 +195,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     */
     public func layoutView() {
         for module in modules {
-            if module.respondsToSelector("layoutView") {
+            if module.respondsToSelector(#selector(CPModuleViewDelegate.layoutView)) {
                 let vodule = module as! CPModuleViewDelegate
                 vodule.layoutView()
             }
@@ -203,14 +204,14 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func endPlayCode(state: CPState) {
         for module in modules {
-            if module.respondsToSelector("endPlayCode:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.endPlayCode(_:))) {
                 module.endPlayCode!(state)
             }
         }
     }
     public func endSection(cp: CPURL) {
         for module in modules {
-            if module.respondsToSelector("endSection:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.endSection(_:))) {
                 module.endSection!(cp)
             }
         }
@@ -218,7 +219,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func startSection(cp: CPURL) {
         for module in modules {
-            if module.respondsToSelector("startSection:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.startSection(_:))) {
                 module.startSection!(cp)
             }
         }
@@ -226,7 +227,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func willSection(cp: CPURL) {
         for module in modules {
-            if module.respondsToSelector("willSection:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.willSection(_:))) {
                 module.willSection!(cp)
             }
         }
@@ -234,7 +235,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func airplayShift(on: Bool) {
         for module in modules {
-            if module.respondsToSelector("airplayShift:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.airplayShift(_:))) {
                 module.airplayShift!(on)
             }
         }
@@ -242,7 +243,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func startSeek(time: NSTimeInterval) {
         for module in modules {
-            if module.respondsToSelector("startSeek:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.startSeek(_:))) {
                 module.startSeek!(time)
             }
         }
@@ -250,7 +251,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func seekTo(time: NSTimeInterval) {
         for module in modules {
-            if module.respondsToSelector("seekTo:") {
+            if module.respondsToSelector(#selector(CorePlayerFeature.seekTo(_:))) {
                 module.seekTo!(time)
             }
         }
@@ -258,7 +259,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func endSeek(time: NSTimeInterval, isEnd end:Bool) {
         for module in modules {
-            if module.respondsToSelector("endSeek:isEnd:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.endSeek(_:isEnd:))) {
                 module.endSeek!(time, isEnd: end)
             }
         }
@@ -266,7 +267,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func durationAvailable(duration: NSTimeInterval) {
         for module in modules {
-            if module.respondsToSelector("durationAvailable:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.durationAvailable(_:))) {
                 module.durationAvailable!(duration)
             }
         }
@@ -274,7 +275,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func played(duration: NSTimeInterval) {
         for module in modules {
-            if module.respondsToSelector("played:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.played(_:))) {
                 module.played!(duration)
             }
         }
@@ -282,7 +283,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func playable(duration: NSTimeInterval) {
         for module in modules {
-            if module.respondsToSelector("playable:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.playable(_:))) {
                 module.playable!(duration)
             }
         }
@@ -290,7 +291,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func error(err: CPError) {
         for module in modules {
-            if module.respondsToSelector("error:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.error(_:))) {
                 module.error!(err)
             }
         }
@@ -298,7 +299,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func interrupt(reason: InterruptionReason) {
         for module in modules {
-            if module.respondsToSelector("interrupt:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.interrupt(_:))) {
                 module.interrupt!(reason)
             }
         }
@@ -306,7 +307,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     public func presentationSize(size: CGSize) {
         for module in modules {
-            if module.respondsToSelector("presentationSize:") {
+            if module.respondsToSelector(#selector(CPModuleDelegate.presentationSize(_:))) {
                 module.presentationSize!(size)
             }
         }

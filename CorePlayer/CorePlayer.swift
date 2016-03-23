@@ -99,8 +99,8 @@ public class CorePlayer: NSObject {
         cpview.addSubview(cpplayerView)
         
         #if os(iOS)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResignActive:", name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CorePlayer.appBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CorePlayer.appResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
         #endif
     }
     
@@ -447,8 +447,8 @@ public class CorePlayer: NSObject {
         playerItem?.addObserver(self, forKeyPath:kLoadedKey, options:options, context:nil)
         keyobserver.loaded = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidReachEnd:", name:AVPlayerItemDidPlayToEndTimeNotification, object:playerItem)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidFailed:", name:AVPlayerItemFailedToPlayToEndTimeNotification, object:playerItem)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(CorePlayer.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object:playerItem)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(CorePlayer.playerItemDidFailed(_:)), name:AVPlayerItemFailedToPlayToEndTimeNotification, object:playerItem)
     }
     
     func deregisterPlayerItemEvent() {
@@ -502,7 +502,7 @@ public class CorePlayer: NSObject {
         
         #if os(iOS)
             keyobserver.airplay = player?.listenAirPlayState(self) ?? false
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "audioSessionRouteChange:", name: AVAudioSessionRouteChangeNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CorePlayer.audioSessionRouteChange(_:)), name: AVAudioSessionRouteChangeNotification, object: nil)
         #endif
     }
     
