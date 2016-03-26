@@ -315,81 +315,81 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     #if os(iOS)
     
-    func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    public func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    public func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
+    public func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
         
     }
     
     #else
     
-    func mouseDown(theEvent: NSEvent) {
+    public func mouseDown(theEvent: NSEvent) {
         
     }
     
-    func rightMouseDown(theEvent: NSEvent) {
+    public func rightMouseDown(theEvent: NSEvent) {
         
     }
     
-    func otherMouseDown(theEvent: NSEvent) {
+    public func otherMouseDown(theEvent: NSEvent) {
         
     }
     
-    func mouseUp(theEvent: NSEvent) {
+    public func mouseUp(theEvent: NSEvent) {
         
     }
     
-    func rightMouseUp(theEvent: NSEvent) {
+    public func rightMouseUp(theEvent: NSEvent) {
         
     }
     
-    func otherMouseUp(theEvent: NSEvent) {
+    public func otherMouseUp(theEvent: NSEvent) {
         
     }
     
-    func mouseMoved(theEvent: NSEvent) {
+    public func mouseMoved(theEvent: NSEvent) {
         
     }
     
-    func mouseDragged(theEvent: NSEvent) {
+    public func mouseDragged(theEvent: NSEvent) {
         
     }
     
-    func scrollWheel(theEvent: NSEvent) {
+    public func scrollWheel(theEvent: NSEvent) {
         
     }
     
-    func rightMouseDragged(theEvent: NSEvent) {
+    public func rightMouseDragged(theEvent: NSEvent) {
         
     }
     
-    func otherMouseDragged(theEvent: NSEvent) {
+    public func otherMouseDragged(theEvent: NSEvent) {
         
     }
     
-    func mouseEntered(theEvent: NSEvent) {
+    public func mouseEntered(theEvent: NSEvent) {
         
     }
     
-    func mouseExited(theEvent: NSEvent) {
+    public func mouseExited(theEvent: NSEvent) {
         
     }
     
-    func keyDown(theEvent: NSEvent) {
+    public func keyDown(theEvent: NSEvent) {
         
     }
     
-    func keyUp(theEvent: NSEvent) {
+    public func keyUp(theEvent: NSEvent) {
         
     }
     
