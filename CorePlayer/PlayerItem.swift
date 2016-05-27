@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 flexih. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 
-class CPPlayerItem: AVPlayerItem {
+extension AVPlayerItem {
     
     func URL() -> NSURL {
         return (asset as! AVURLAsset).URL
     }
     
-    func cduration() -> NSTimeInterval {
+    var Duration: NSTimeInterval {
         if status == .Unknown {
             return 0
         }

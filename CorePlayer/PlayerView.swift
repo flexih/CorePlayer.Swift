@@ -18,7 +18,7 @@ enum VideoGravity: Int {
     case Fill
 }
 
-class CPPlayerView: UXView {
+class PlayerView: UXView {
     var gravity: VideoGravity {
         
         get {
@@ -30,8 +30,8 @@ class CPPlayerView: UXView {
             }
         }
         
-        set(newGravity) {
-            if newGravity == .Aspect {
+        set {
+            if newValue == .Aspect {
                 playerLayer().videoGravity = AVLayerVideoGravityResizeAspect
             } else {
                 playerLayer().videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -45,25 +45,24 @@ class CPPlayerView: UXView {
             self.frame = frame
         }
     }
-    
-    #if os(iOS)
-    
-    override class func layerClass() -> AnyClass {
-        return AVPlayerLayer.self
+
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+
+        set {
+            var newFrame = newValue
+            #if __USE_SCALE__
+                newFrame.size.width *= scale
+                newFrame.size.height *= scale
+                newFrame.origin.x = floor((newValue.size.width - newFrame.size.width) * 0.5)
+                newFrame.origin.y = floor((newValue.size.height - newFrame.size.height) * 0.5)
+            #endif
+            super.frame = newFrame
+        }
     }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-    }
-    
-    #else
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    #endif
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         #if os(iOS)
@@ -74,25 +73,27 @@ class CPPlayerView: UXView {
         #endif
     }
     
-    override var frame: CGRect {
-        
-        get {
-            return super.frame
-        }
-        
-        set(newFrame) {
-            var frame = newFrame
-            #if __USE_SCALE__
-                frame.size.width *= scale
-                frame.size.height *= scale
-                frame.origin.x = floor((newFrame.size.width - frame.size.width) * 0.5)
-                frame.origin.y = floor((newFrame.size.height - frame.size.height) * 0.5)
-            #endif
-            super.frame = frame
-        }
+    #if os(iOS)
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
     }
+    
+    #else
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    #endif
     
     func playerLayer() -> AVPlayerLayer {
         return layer as! AVPlayerLayer
     }
 }
+
+#if os(iOS)
+extension PlayerView {
+    override class func layerClass() -> AnyClass {
+        return AVPlayerLayer.self
+    }
+}
+#endif

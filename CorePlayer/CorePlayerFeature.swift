@@ -8,22 +8,6 @@
 
 import AVFoundation
 
-@objc public enum CPState: Int {
-    case None
-    case AssetReady
-    case ItemReady
-    case PlayReady
-    case End
-    case Failed
-    case Error
-    case Stop
-}
-
-@objc public enum CPError: Int {
-    case URLError = -1000
-    case Error
-}
-
 @objc public protocol CorePlayerFeature: NSObjectProtocol {
     
     var scaleFill: Bool { get set }

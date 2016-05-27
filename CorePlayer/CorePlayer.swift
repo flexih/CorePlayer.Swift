@@ -9,24 +9,28 @@
 import AVFoundation
 #if os(iOS)
     import UIKit
+    public typealias UXView = UIView
 #else
     import AppKit
+    public typealias UXView = NSView
 #endif
 
-let kTracksKey           = "tracks"
-let kStatusKey           = "status"
-let kPlaybackKeepUpKey   = "playbackLikelyToKeepUp"
-let kPresentationSizeKey = "presentationSize"
-let kRateKey             = "rate"
-let kDurationKey         = "duration"
-let kLoadedKey           = "loadedTimeRanges"
-let kPlayableKey         = "playable"
-let kCurrentItemKey      = "currentItem"
-let kTimedMetadataKey    = "currentItem.timedMetadata"
-
 public class CorePlayer: NSObject {
+
+    private struct Keys {
+        static let TracksKey           = "tracks"
+        static let StatusKey           = "status"
+        static let PlaybackKeepUpKey   = "playbackLikelyToKeepUp"
+        static let PresentationSizeKey = "presentationSize"
+        static let RateKey             = "rate"
+        static let DurationKey         = "duration"
+        static let LoadedKey           = "loadedTimeRanges"
+        static let PlayableKey         = "playable"
+        static let CurrentItemKey      = "currentItem"
+        static let TimedMetadataKey    = "currentItem.timedMetadata"
+    }
     
-    struct Keyobserver {
+    private struct KeyObserver {
         var keep = false
         var rate = false
         var duration = false
@@ -38,7 +42,7 @@ public class CorePlayer: NSObject {
         var presentation = false
     }
     
-    struct Playerstate {
+    private struct PlayerState {
         var state:CPState = .None
         var lastplay = false
         var seeking = false
@@ -50,20 +54,20 @@ public class CorePlayer: NSObject {
         var seekhead = false
     }
     
-    var keyobserver: Keyobserver = Keyobserver()
-    var playerstate: Playerstate = Playerstate()
+    private var keyobserver = Keyobserver()
+    private var playerstate = Playerstate()
     
-    var cpmoduleManager: CPModuleManager
-    var cpview: CPContentView
-    var cpplayerView: CPPlayerView
-    var playerItem: CPPlayerItem?
-    var playerAsset: AVURLAsset?
-    var backPlayer: CPPlayer?
-    var backView: CPPlayerView?
-    var playedObserver: AnyObject?
-    var cpus: Array<CPURL> = []
-    var cpi: Int = 0
-    var player: CPPlayer? {
+    var moduleManager: ModuleManager
+    private var contentView: ContentView
+    private var playerView: PlayerView
+    private var playerItem: AVPLayerItem?
+    private var playerAsset: AVURLAsset?
+    private var backPlayer: Player?
+    private var backView: PlayerView?
+    private var playedObserver: AnyObject?
+    private var cpus: Array<CPURL> = []
+    private var cpi: Int = 0
+    private var player: Player? {
         willSet {
             if player != nil {
                 deregisterPlayerEvent()
@@ -71,49 +75,49 @@ public class CorePlayer: NSObject {
         }
         
         didSet {
-            cpplayerView.playerLayer().player = player
+            playerView.playerLayer().player = player
         }
     }
     
     #if os(iOS)
-    var interruption: CPInterruption
+    private var interruption: CPInterruption
     #endif
     
     public init(moduleManager: CPModuleManager) {
-        cpview = CPContentView()
-        cpplayerView = CPPlayerView()
-        cpmoduleManager = moduleManager
+        contentView = ContentView()
+        playerView = PlayerView()
+        self.moduleManager = moduleManager
         
         #if os(iOS)
             interruption = CPInterruption()
-            cpplayerView.clipsToBounds = true
-            cpplayerView.backgroundColor = UIColor.blackColor()
+            playerView.clipsToBounds = true
+            playerView.backgroundColor = UIColor.blackColor()
         #else
-            cpview.acceptsTouchEvents = true
+            contentView.acceptsTouchEvents = true
         #endif
         
         super.init()
         
-        cpmoduleManager.moduleDelegate = self
-        cpview.layoutManager = self
-        cpview.addSubview(cpplayerView)
+        moduleManager.moduleDelegate = self
+        contentView.layoutManager = self
+        contentView.addSubview(playerView)
         
         #if os(iOS)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CorePlayer.appBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CorePlayer.appResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
         #endif
     }
     
     public override convenience init() {
-        self.init(moduleManager: CPModuleManager())
+        self.init(moduleManager: ModuleManager())
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         
-        cpmoduleManager.deinitModule()
+        moduleManager.deinitModule()
         
-        cpview.removeFromSuperview()
+        contentView.removeFromSuperview()
     }
     
     func observePlayed() {

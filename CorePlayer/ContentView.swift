@@ -12,7 +12,7 @@
     import AppKit
 #endif
 
-protocol CPContentLayoutManager: NSObjectProtocol {
+protocol ContentLayoutManager {
     
     func contentsLayout(view: UXView)
     
@@ -40,113 +40,123 @@ protocol CPContentLayoutManager: NSObjectProtocol {
     #endif
 }
 
-class CPContentView: UXView {
-    
-    weak var layoutManager: CPContentLayoutManager?
-    
-    #if os(iOS)
+class ContentView: UXView {
+    weak var layoutManager: ContentLayoutManager?
+}
+
+#if os(iOS)
+extension ContentView {
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutManager?.contentsLayout(self)
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
         layoutManager?.contentsTouchesBegan(touches, withEvent: event)
     }
 
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesMoved(touches, withEvent: event)
         layoutManager?.contentsTouchesMoved(touches, withEvent: event)
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
         layoutManager?.contentsTouchesEnded(touches, withEvent: event)
     }
-    
+
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        super.touchesCancelled(touches, withEvent: event)
         layoutManager?.contentsTouchesCancelled(touches, withEvent: event)
     }
-    
-    #else
+}
+#endif
+
+#if os(OSX)
+extension ContentView {
     override func resizeSubviewsWithOldSize(oldSize: NSSize) {
         super.resizeSubviewsWithOldSize(oldSize)
         layoutManager?.contentsLayout(self)
     }
-    
+
     override func mouseDown(theEvent: NSEvent) {
         super.mouseDown(theEvent)
         layoutManager?.contentsMouseDown(theEvent)
     }
-    
+
     override func rightMouseDown(theEvent: NSEvent) {
         super.rightMouseDown(theEvent)
         layoutManager?.contentsRightMouseDown(theEvent)
     }
-    
+
     override func otherMouseDown(theEvent: NSEvent) {
         super.otherMouseDown(theEvent)
         layoutManager?.contentsOtherMouseDown(theEvent)
     }
-    
+
     override func mouseUp(theEvent: NSEvent) {
         super.mouseUp(theEvent)
         layoutManager?.contentsMouseUp(theEvent)
     }
-    
+
     override func rightMouseUp(theEvent: NSEvent) {
         super.rightMouseUp(theEvent)
         layoutManager?.contentsRightMouseUp(theEvent)
     }
-    
+
     override func otherMouseUp(theEvent: NSEvent) {
         super.otherMouseUp(theEvent)
         layoutManager?.contentsOtherMouseUp(theEvent)
     }
-    
+
     override func mouseMoved(theEvent: NSEvent) {
         super.mouseMoved(theEvent)
         layoutManager?.contentsMouseMoved(theEvent)
     }
-    
+
     override func mouseDragged(theEvent: NSEvent) {
         super.mouseDragged(theEvent)
         layoutManager?.contentsMouseDragged(theEvent)
     }
-    
+
     override func scrollWheel(theEvent: NSEvent) {
         super.scrollWheel(theEvent)
         layoutManager?.contentsScrollWheel(theEvent)
     }
-    
+
     override func rightMouseDragged(theEvent: NSEvent) {
         super.rightMouseDragged(theEvent)
         layoutManager?.contentsRightMouseDragged(theEvent)
     }
-    
+
     override func otherMouseDragged(theEvent: NSEvent) {
         super.otherMouseDragged(theEvent)
         layoutManager?.contentsOtherMouseDragged(theEvent)
     }
-    
+
     override func mouseEntered(theEvent: NSEvent) {
         super.mouseEntered(theEvent)
         layoutManager?.contentsMouseEntered(theEvent)
     }
-    
+
     override func mouseExited(theEvent: NSEvent) {
         super.mouseExited(theEvent)
         layoutManager?.contentsMouseExited(theEvent)
     }
-    
+
     override func keyDown(theEvent: NSEvent) {
         super.keyDown(theEvent)
         layoutManager?.contentsKeyDown(theEvent)
     }
-    
+
     override func keyUp(theEvent: NSEvent) {
         super.keyUp(theEvent)
         layoutManager?.contentsKeyUp(theEvent)
     }
-    #endif
 }
+
+#endif
 
 
