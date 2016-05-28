@@ -12,7 +12,7 @@
     import AppKit
 #endif
 
-protocol ContentLayoutManager {
+protocol ContentLayoutManager: class {
     
     func contentsLayout(view: UXView)
     

@@ -9,7 +9,7 @@
 public class CPModuleView: UXView, ModuleViewDelegate {
     
     public weak var moduleManager: ModuleManager?
-//    public weak var moduleDelegate: CorePlayerFeature?
+    public weak var moduleDelegate: CorePlayerFeature?
 
     public var moduelIndex: Int = 0
     public var moduleShow: Bool = false

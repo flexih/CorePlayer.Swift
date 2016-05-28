@@ -45,7 +45,7 @@ public enum InterruptionReason: Int {
 public protocol ModuleDelegate {
 
     weak var moduleManager: ModuleManager? { get set }
-//    weak var moduleDelegate: Feature? { get set }
+    weak var moduleDelegate: CorePlayerFeature? { get set }
 
     /**
      Do initializations when module added to module manager

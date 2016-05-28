@@ -15,7 +15,7 @@
 public class ModuleManager {
 
     public weak var moduleManager: ModuleManager?
-//    public weak var moduleDelegate: PlayerFeature?
+    public weak var moduleDelegate: CorePlayerFeature?
 
     private var modules: Array<ModuleDelegate> = []
     
@@ -34,7 +34,10 @@ public class ModuleManager {
     public func registerModules(newModules: Array<ModuleDelegate>) {
 
         newModules.forEach {
-            registerModule($0)
+            var module = $0
+            module.moduleDelegate = moduleDelegate
+            module.moduleManager = self
+            modules.append(module)
         }
 
         modules.sortInPlace(moduleSorter)
@@ -57,12 +60,6 @@ public class ModuleManager {
             let rModuelIndex = (rhs as! ModuleViewDelegate).moduelIndex
             return rModuelIndex > lModuelIndex
         }
-    }
-    
-    private func registerModule(module: ModuleDelegate) {
-//        module.moduleDelegate = moduleDelegate
-//        module.moduleManager = self
-        modules.append(module)
     }
 
     private func unregisterModule(module: ModuleDelegate) {

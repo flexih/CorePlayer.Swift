@@ -9,25 +9,23 @@
 import AVFoundation
 #if os(iOS)
     import UIKit
-    public typealias UXView = UIView
 #else
     import AppKit
-    public typealias UXView = NSView
 #endif
 
 public class CorePlayer: NSObject {
 
     private struct Keys {
-        static let TracksKey           = "tracks"
-        static let StatusKey           = "status"
-        static let PlaybackKeepUpKey   = "playbackLikelyToKeepUp"
-        static let PresentationSizeKey = "presentationSize"
-        static let RateKey             = "rate"
-        static let DurationKey         = "duration"
-        static let LoadedKey           = "loadedTimeRanges"
-        static let PlayableKey         = "playable"
-        static let CurrentItemKey      = "currentItem"
-        static let TimedMetadataKey    = "currentItem.timedMetadata"
+        static let Tracks           = "tracks"
+        static let Status           = "status"
+        static let PlaybackKeepUp   = "playbackLikelyToKeepUp"
+        static let PresentationSize = "presentationSize"
+        static let Rate             = "rate"
+        static let Duration         = "duration"
+        static let Loaded           = "loadedTimeRanges"
+        static let Playable         = "playable"
+        static let CurrentItem      = "currentItem"
+        static let TimedMetadata    = "currentItem.timedMetadata"
     }
     
     private struct KeyObserver {
@@ -43,7 +41,7 @@ public class CorePlayer: NSObject {
     }
     
     private struct PlayerState {
-        var state:CPState = .None
+        var state = CPState.None
         var lastplay = false
         var seeking = false
         var play = false
@@ -54,13 +52,13 @@ public class CorePlayer: NSObject {
         var seekhead = false
     }
     
-    private var keyobserver = Keyobserver()
-    private var playerstate = Playerstate()
+    private var keyobserver = KeyObserver()
+    private var playerstate = PlayerState()
     
-    var moduleManager: ModuleManager
+    public private(set) var moduleManager: ModuleManager
     private var contentView: ContentView
     private var playerView: PlayerView
-    private var playerItem: AVPLayerItem?
+    private var playerItem: AVPlayerItem?
     private var playerAsset: AVURLAsset?
     private var backPlayer: Player?
     private var backView: PlayerView?
@@ -80,16 +78,16 @@ public class CorePlayer: NSObject {
     }
     
     #if os(iOS)
-    private var interruption: CPInterruption
+    private var interruption: Interruption
     #endif
     
-    public init(moduleManager: CPModuleManager) {
+    public init(moduleManager: ModuleManager) {
         contentView = ContentView()
         playerView = PlayerView()
         self.moduleManager = moduleManager
         
         #if os(iOS)
-            interruption = CPInterruption()
+            interruption = Interruption()
             playerView.clipsToBounds = true
             playerView.backgroundColor = UIColor.blackColor()
         #else
@@ -120,11 +118,11 @@ public class CorePlayer: NSObject {
         contentView.removeFromSuperview()
     }
     
-    func observePlayed() {
+    private func observePlayed() {
         var span: NSTimeInterval = 1
         
         if durationSpan() > 0 {
-            span = playerItem!.cduration() / NSTimeInterval(durationSpan())
+            span = playerItem!.Duration / durationSpan()
         }
         
         if (span < 0.5) {
@@ -136,32 +134,22 @@ public class CorePlayer: NSObject {
         unobservePlayed()
         
         playedObserver = player!.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(Float64(span), Int32(NSEC_PER_SEC)), queue: dispatch_get_main_queue(), usingBlock: { [weak self] time in
-            if let strongSelf = self {
-                strongSelf.cpmoduleManager.played(strongSelf.played())
-            }
+            self?.moduleManager.played(self?.played() ?? 0)
         })
     }
     
-    func unobservePlayed() {
+    private func unobservePlayed() {
         if playedObserver != nil {
             player!.removeTimeObserver(playedObserver!)
             playedObserver = nil
         }
     }
     
-    func playable() -> NSTimeInterval {
-        if let loadedRanges = playerItem?.loadedTimeRanges {
-            if loadedRanges.count > 0 {
-                let range: CMTimeRange = loadedRanges[0].CMTimeRangeValue
-                let rangeTime = CMTimeAdd(range.start, range.duration)
-                let playable = CMTimeGetSeconds(rangeTime)
-                return playable
-            }
-        }
-        return 0
+    private func playable() -> NSTimeInterval {
+        return playerItem?.Playable ?? 0
     }
     
-    public func durationSpan() -> Int {
+    public func durationSpan() -> NSTimeInterval {
         return 1
     }
     
@@ -170,7 +158,7 @@ public class CorePlayer: NSObject {
     }
     
     public func handleError(error: CPError) {
-        cpmoduleManager.error(error)
+        moduleManager.error(error)
     }
     
     public func stop() {
@@ -186,7 +174,7 @@ public class CorePlayer: NSObject {
             stopPlaybackSession()
             
         } else if playerstate.state == .None {
-            cpmoduleManager.cancelPlay()
+            moduleManager.cancelPlay()
         }
         
         if playerstate.state != .Stop {
@@ -199,31 +187,31 @@ public class CorePlayer: NSObject {
     }
     
     func startPause() {
-        cpmoduleManager.willPause()
+        moduleManager.willPause()
     }
     
     func stopPause() {
-        cpmoduleManager.endPause()
+        moduleManager.endPause()
     }
     
     func startPending() {
-        cpmoduleManager.willPend()
+        moduleManager.willPend()
     }
     
     func stopPending() {
-        cpmoduleManager.endPend()
+        moduleManager.endPend()
     }
     
     func startLoading() {
-        cpmoduleManager.willSection(cpu()!)
-        cpmoduleManager.willPlay()
+        moduleManager.willSection(cpu()!)
+        moduleManager.willPlay()
     }
     
     func stopLoading() {
-        cpmoduleManager.startSection(cpu()!)
+        moduleManager.startSection(cpu()!)
         
         if cpi == 0 {
-            cpmoduleManager.startPlay()
+            moduleManager.startPlay()
             
             #if os(iOS)
             interruption.observeInterruption(self)
@@ -242,7 +230,7 @@ public class CorePlayer: NSObject {
             }
         }
         
-        cpmoduleManager.appResign()
+        moduleManager.appResign()
     }
     
     func appBecomeActive(notification: NSNotification) {
@@ -260,7 +248,7 @@ public class CorePlayer: NSObject {
             player?.play()
         }
         
-        cpmoduleManager.appActive()
+        moduleManager.appActive()
     }
     
     #endif
@@ -273,7 +261,7 @@ public class CorePlayer: NSObject {
         player?.cancelPendingPrerolls()
         playerItem?.cancelPendingSeeks()
         playerAsset?.cancelLoading()
-        cpplayerView.playerLayer().player = nil
+        playerView.playerLayer().player = nil
         
         backPlayer?.pause()
         backPlayer?.cancelPendingPrerolls()
@@ -289,8 +277,8 @@ public class CorePlayer: NSObject {
            playerstate.state == .End       ||
            playerstate.state == .Failed    ||
            playerstate.state == .Stop {
-                cpmoduleManager.endSection(cpu()!)
-                cpmoduleManager.endPlayCode(playerstate.state)
+                moduleManager.endSection(cpu()!)
+                moduleManager.endPlayCode(playerstate.state)
                 #if os(iOS)
                 interruption.unobserver()
                 #endif
@@ -341,35 +329,35 @@ public class CorePlayer: NSObject {
             playerstate.readyplay = false
             
             playerstate.state = .End
-            cpmoduleManager.endSection(cpu()!)
+            moduleManager.endSection(cpu()!)
             
             cpi += 1
             playerstate.state = .ItemReady
             
-            cpmoduleManager.willSection(cpu()!)
+            moduleManager.willSection(cpu()!)
             
-            playerItem = backPlayer?.currentItem as? CPPlayerItem
+            playerItem = backPlayer?.currentItem
             playerAsset = playerItem?.asset as? AVURLAsset
             
             registerPlayerItemEvent()
             
-            let superview: UXView! = cpplayerView.superview
+            let superview: UXView! = playerView.superview
             
-            cpplayerView.removeFromSuperview()
+            playerView.removeFromSuperview()
             
-            if superview == cpview {
+            if superview == contentView {
                 #if os(iOS)
-                    cpview.insertSubview(backView!, atIndex:0)
+                    contentView.insertSubview(backView!, atIndex:0)
                 #else
-                    cpview.addSubview(backView!, positioned:.Below, relativeTo:nil)
+                    contentView.addSubview(backView!, positioned:.Below, relativeTo:nil)
                 #endif
             } else {
                 superview.addSubview(backView!)
             }
             
-            backView!.frame = cpplayerView.frame
-            cpplayerView = backView!
-            cpplayerView.gravity = scaleFill ? .Fill : .Aspect
+            backView!.frame = playerView.frame
+            playerView = backView!
+            playerView.gravity = scaleFill ? .Fill : .Aspect
             player = backPlayer
             #if os(iOS)
                 player!.allowsExternalPlayback = allowAirPlay
@@ -414,7 +402,7 @@ public class CorePlayer: NSObject {
                 }
             })
             
-            cpu()!.from = 0.0
+//            cpu()!.from = 0.0
         }
         
         var active = true
@@ -428,85 +416,85 @@ public class CorePlayer: NSObject {
             player?.play()
         }
             
-        if playerItem!.cduration() > 0 {
-            cpmoduleManager.durationAvailable(duration())
+        if playerItem!.Duration > 0 {
+            moduleManager.durationAvailable(duration())
         }
     }
     
     func registerPlayerItemEvent() {
         let options = NSKeyValueObservingOptions([.Old, .New])
         
-        playerItem?.addObserver(self, forKeyPath:kStatusKey, options:options, context: UnsafeMutablePointer<Void>(unsafeAddressOf(kStatusKey)))
+        playerItem?.addObserver(self, forKeyPath: Keys.Status, options: options, context: UnsafeMutablePointer<Void>(unsafeAddressOf(Keys.Status)))
         keyobserver.status = true
         
-        playerItem?.addObserver(self, forKeyPath:kPlaybackKeepUpKey, options:options, context:nil)
+        playerItem?.addObserver(self, forKeyPath: Keys.PlaybackKeepUp, options: options, context: nil)
         keyobserver.keep = true
         
-        playerItem?.addObserver(self, forKeyPath:kPresentationSizeKey, options:options, context:nil)
+        playerItem?.addObserver(self, forKeyPath: Keys.PresentationSize, options: options, context: nil)
         keyobserver.presentation = true
         
-        playerItem?.addObserver(self, forKeyPath:kDurationKey, options:options, context:nil)
+        playerItem?.addObserver(self, forKeyPath: Keys.Duration, options: options, context: nil)
         keyobserver.duration = true
         
-        playerItem?.addObserver(self, forKeyPath:kLoadedKey, options:options, context:nil)
+        playerItem?.addObserver(self, forKeyPath: Keys.Loaded, options: options, context: nil)
         keyobserver.loaded = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(CorePlayer.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object:playerItem)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(CorePlayer.playerItemDidFailed(_:)), name:AVPlayerItemFailedToPlayToEndTimeNotification, object:playerItem)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object:playerItem)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(playerItemDidFailed(_:)), name:AVPlayerItemFailedToPlayToEndTimeNotification, object:playerItem)
     }
     
     func deregisterPlayerItemEvent() {
         if keyobserver.status {
-            playerItem?.removeObserver(self, forKeyPath:kStatusKey)
+            playerItem?.removeObserver(self, forKeyPath: Keys.Status)
             keyobserver.status = false
         }
         
         if keyobserver.keep {
-            playerItem?.removeObserver(self, forKeyPath:kPlaybackKeepUpKey)
+            playerItem?.removeObserver(self, forKeyPath: Keys.PlaybackKeepUp)
             keyobserver.keep = false
         }
         
         if keyobserver.presentation {
-            playerItem?.removeObserver(self, forKeyPath:kPresentationSizeKey)
+            playerItem?.removeObserver(self, forKeyPath: Keys.PresentationSize)
             keyobserver.presentation = false
         }
         
         if keyobserver.duration {
-            playerItem?.removeObserver(self, forKeyPath:kDurationKey)
+            playerItem?.removeObserver(self, forKeyPath: Keys.Duration)
             keyobserver.duration = false
         }
         
         if keyobserver.loaded {
-            playerItem?.removeObserver(self, forKeyPath:kLoadedKey)
+            playerItem?.removeObserver(self, forKeyPath: Keys.Loaded)
             keyobserver.loaded = false
         }
         
         #if os(iOS)
             if keyobserver.airplay {
-                player?.unlistenAirPlayState(self)
+//                player?.unlistenAirPlayState(self)
                 keyobserver.airplay = false
             }
         #endif
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:AVPlayerItemDidPlayToEndTimeNotification, object:playerItem)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:AVPlayerItemFailedToPlayToEndTimeNotification, object:playerItem)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemFailedToPlayToEndTimeNotification, object: playerItem)
     }
     
     func registerPlayerEvent() {
         let options = NSKeyValueObservingOptions([.Old, .New])
         
-        player?.addObserver(self, forKeyPath:kRateKey, options:options, context:nil)
+        player?.addObserver(self, forKeyPath: Keys.Rate, options: options, context: nil)
         keyobserver.rate = true
         
-        player?.addObserver(self, forKeyPath:kCurrentItemKey, options:options, context:nil)
+        player?.addObserver(self, forKeyPath: Keys.CurrentItem, options:options, context:nil)
         keyobserver.item = true
         
-        player?.addObserver(self, forKeyPath:kTimedMetadataKey, options:options, context:nil)
+        player?.addObserver(self, forKeyPath: Keys.TimedMetadata, options:options, context:nil)
         keyobserver.meta = true
         
         #if os(iOS)
-            keyobserver.airplay = player?.listenAirPlayState(self) ?? false
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CorePlayer.audioSessionRouteChange(_:)), name: AVAudioSessionRouteChangeNotification, object: nil)
+//            keyobserver.airplay = player?.listenAirPlayState(self) ?? false
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(audioSessionRouteChange(_:)), name: AVAudioSessionRouteChangeNotification, object: nil)
         #endif
     }
     
@@ -516,17 +504,17 @@ public class CorePlayer: NSObject {
     
     func deregisterPlayerEvent() {
         if keyobserver.rate {
-            player?.removeObserver(self, forKeyPath:kRateKey)
+            player?.removeObserver(self, forKeyPath: Keys.Rate)
             keyobserver.rate = false
         }
         
         if keyobserver.item {
-            player?.removeObserver(self, forKeyPath:kCurrentItemKey)
+            player?.removeObserver(self, forKeyPath: Keys.CurrentItem)
             keyobserver.item = false
         }
         
         if keyobserver.meta {
-            player?.removeObserver(self, forKeyPath:kTimedMetadataKey)
+            player?.removeObserver(self, forKeyPath: Keys.TimedMetadata)
             keyobserver.meta = false
         }
         
@@ -537,7 +525,7 @@ public class CorePlayer: NSObject {
     
     func deregisterRate() {
         if keyobserver.rate {
-            player?.removeObserver(self, forKeyPath:kRateKey)
+            player?.removeObserver(self, forKeyPath: Keys.Rate)
             keyobserver.rate = false
         }
     }
@@ -550,20 +538,20 @@ public class CorePlayer: NSObject {
         if cpi + 1 < cpus.count {
             let cpu = cpus[cpi + 1]
             let asset = AVURLAsset(CPU: cpu)
-            let playerItem = CPPlayerItem(asset: asset)
+            let playerItem = AVPlayerItem(asset: asset)
             
-            backPlayer = CPPlayer(playerItem: playerItem)
+            backPlayer = Player(playerItem: playerItem)
             backPlayer!.actionAtItemEnd = .Pause
             #if os(iOS)
                 backPlayer!.allowsExternalPlayback = false
             #endif
-            backView = CPPlayerView()
+            backView = PlayerView()
             backView!.playerLayer().player = backPlayer
         }
     }
 
     override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == kPlaybackKeepUpKey {
+        if keyPath == Keys.PlaybackKeepUp {
             if playerstate.state == .AssetReady ||
                playerstate.state == .ItemReady {
                 return
@@ -579,9 +567,9 @@ public class CorePlayer: NSObject {
             
             playerstate.pending = !keep
             
-        } else if keyPath == kRateKey {
+        } else if keyPath == Keys.Rate {
             let rate = (change?[NSKeyValueChangeNewKey] as! NSNumber).floatValue
-            let isPlay = CPPlayer.isRatePlaying(rate)
+            let isPlay = Player.isRatePlaying(rate)
             
             if isPlay {
                 if playedObserver == nil {
@@ -608,13 +596,13 @@ public class CorePlayer: NSObject {
             
             playerstate.play = isPlay
             
-        } else if keyPath == kLoadedKey {
+        } else if keyPath == Keys.Loaded {
             let loadedRanges = playerItem!.loadedTimeRanges
             if loadedRanges.count > 0 {
-                cpmoduleManager.playable(playable())
+                moduleManager.playable(playable())
             }
             
-        } else if keyPath == kStatusKey {
+        } else if keyPath == Keys.Status {
             let status = AVPlayerStatus(rawValue: (change?[NSKeyValueChangeNewKey] as! NSNumber).integerValue)!
             switch (status) {
             case .ReadyToPlay:
@@ -643,122 +631,122 @@ public class CorePlayer: NSObject {
                 handleError(.Error)
             }
             
-        } else if keyPath == kDurationKey {
-            cpmoduleManager.durationAvailable(duration())
+        } else if keyPath == Keys.Duration {
+            moduleManager.durationAvailable(duration())
             
-        } else if keyPath == kCurrentItemKey {
+        } else if keyPath == Keys.CurrentItem {
             
-        } else if keyPath == kTimedMetadataKey {
+        } else if keyPath == Keys.TimedMetadata {
             
-        } else if keyPath == kPresentationSizeKey {
+        } else if keyPath == Keys.PresentationSize {
             #if os(iOS)
-                cpmoduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).CGSizeValue())
+                moduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).CGSizeValue())
             #else
-                cpmoduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).sizeValue)
+                moduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).sizeValue)
             #endif
         } else {
             #if os(iOS)
-            if keyPath == player!.airPlayObserverKey() {
-                playerstate.airplay = (change?[NSKeyValueChangeNewKey] as! NSNumber).boolValue
-                cpmoduleManager.airplayShift(playerstate.airplay)
-                return
-            }
+//            if keyPath == player!.airPlayObserverKey() {
+//                playerstate.airplay = (change?[NSKeyValueChangeNewKey] as! NSNumber).boolValue
+//                moduleManager.airplayShift(playerstate.airplay)
+//                return
+//            }
             #endif
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
     }
 }
 
-extension CorePlayer: CPContentLayoutManager {
+extension CorePlayer: ContentLayoutManager {
 
     func contentsLayout(view: UXView) {
         let v: UXView = view.subviews[0]
 
-        if v.isMemberOfClass(CPPlayerView) {
+        if v is PlayerView {
             v.frame = view.bounds
         }
         
-        cpmoduleManager.layoutView()
+        moduleManager.layoutView()
     }
     
     #if os(iOS)
     
     func contentsTouchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
-        cpmoduleManager.touchesBegan(touches, withEvent: event)
+        moduleManager.touchesBegan(touches, withEvent: event)
     }
     
     func contentsTouchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
-        cpmoduleManager.touchesMoved(touches, withEvent: event)
+        moduleManager.touchesMoved(touches, withEvent: event)
     }
     
     func contentsTouchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
-        cpmoduleManager.touchesEnded(touches, withEvent: event)
+        moduleManager.touchesEnded(touches, withEvent: event)
     }
     
     func contentsTouchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
-        cpmoduleManager.touchesCancelled(touches, withEvent: event)
+        moduleManager.touchesCancelled(touches, withEvent: event)
     }
     
     #else
     
     func contentsMouseDown(theEvent: NSEvent) {
-        cpmoduleManager.mouseDown(theEvent)
+        moduleManager.mouseDown(theEvent)
     }
     
     func contentsRightMouseDown(theEvent: NSEvent) {
-        cpmoduleManager.rightMouseDown(theEvent)
+        moduleManager.rightMouseDown(theEvent)
     }
     
     func contentsOtherMouseDown(theEvent: NSEvent) {
-        cpmoduleManager.otherMouseDown(theEvent)
+        moduleManager.otherMouseDown(theEvent)
     }
     
     func contentsMouseUp(theEvent: NSEvent) {
-        cpmoduleManager.mouseUp(theEvent)
+        moduleManager.mouseUp(theEvent)
     }
     
     func contentsRightMouseUp(theEvent: NSEvent) {
-        cpmoduleManager.rightMouseUp(theEvent)
+        moduleManager.rightMouseUp(theEvent)
     }
     
     func contentsOtherMouseUp(theEvent: NSEvent) {
-        cpmoduleManager.otherMouseUp(theEvent)
+        moduleManager.otherMouseUp(theEvent)
     }
     
     func contentsMouseMoved(theEvent: NSEvent) {
-        cpmoduleManager.mouseMoved(theEvent)
+        moduleManager.mouseMoved(theEvent)
     }
     
     func contentsMouseDragged(theEvent: NSEvent) {
-        cpmoduleManager.mouseDragged(theEvent)
+        moduleManager.mouseDragged(theEvent)
     }
     
     func contentsScrollWheel(theEvent: NSEvent) {
-        cpmoduleManager.scrollWheel(theEvent)
+        moduleManager.scrollWheel(theEvent)
     }
     
     func contentsRightMouseDragged(theEvent: NSEvent) {
-        cpmoduleManager.rightMouseDragged(theEvent)
+        moduleManager.rightMouseDragged(theEvent)
     }
     
     func contentsOtherMouseDragged(theEvent: NSEvent) {
-        cpmoduleManager.otherMouseDragged(theEvent)
+        moduleManager.otherMouseDragged(theEvent)
     }
     
     func contentsMouseEntered(theEvent: NSEvent) {
-        cpmoduleManager.mouseEntered(theEvent)
+        moduleManager.mouseEntered(theEvent)
     }
     
     func contentsMouseExited(theEvent: NSEvent) {
-        cpmoduleManager.mouseExited(theEvent)
+        moduleManager.mouseExited(theEvent)
     }
     
     func contentsKeyDown(theEvent: NSEvent) {
-        cpmoduleManager.keyDown(theEvent)
+        moduleManager.keyDown(theEvent)
     }
     
     func contentsKeyUp(theEvent: NSEvent) {
-        cpmoduleManager.keyUp(theEvent)
+        moduleManager.keyUp(theEvent)
     }
     
     #endif
@@ -766,10 +754,10 @@ extension CorePlayer: CPContentLayoutManager {
 
 #if os(iOS)
 
-extension CorePlayer: CPInterruptionDelegate {
+extension CorePlayer: InterruptionDelegate {
     
     func interrupt(reason: InterruptionReason) {
-        cpmoduleManager.interrupt(reason)
+        moduleManager.interrupt(reason)
     }
 }
     
@@ -780,11 +768,11 @@ extension CorePlayer: CorePlayerFeature {
     public var scaleFill: Bool {
         
         get {
-            return cpplayerView.gravity == .Fill
+            return playerView.gravity == .Fill
         }
         
         set {
-            cpplayerView.gravity = scaleFill ? .Fill : .Aspect
+            playerView.gravity = scaleFill ? .Fill : .Aspect
         }
     }
     
@@ -825,11 +813,11 @@ extension CorePlayer: CorePlayerFeature {
         self.cpus = cpus
         playerstate.state = .ItemReady
         playerAsset = AVURLAsset(CPU: cpu()!)
-        playerItem = CPPlayerItem(asset: playerAsset!)
+        playerItem = AVPlayerItem(asset: playerAsset!)
         
         registerPlayerItemEvent()
         
-        player = CPPlayer(playerItem: playerItem! as AVPlayerItem)
+        player = Player(playerItem: playerItem! as AVPlayerItem)
         player!.actionAtItemEnd = .Pause
         #if os(iOS)
         player!.allowsExternalPlayback = allowAirPlay
@@ -856,17 +844,13 @@ extension CorePlayer: CorePlayerFeature {
     public func avplayer() -> AVPlayer? {
         return player
     }
-
-    public func moduleManager() -> CPModuleManager {
-        return cpmoduleManager
+    
+    public func playerview() -> UXView {
+        return playerView
     }
 
     public func view() -> UXView {
-        return cpview
-    }
-    
-    public func playerView() -> UXView {
-        return cpplayerView
+        return contentView
     }
 
     public func cpu() -> CPURL? {
@@ -878,11 +862,7 @@ extension CorePlayer: CorePlayerFeature {
     }
 
     public func duration() -> NSTimeInterval {
-        if let playerItem = playerItem {
-            return playerItem.cduration()
-        }
-        
-        return 0
+        return playerItem?.Duration ?? 0
     }
     
     public func played() -> NSTimeInterval {
@@ -891,8 +871,8 @@ extension CorePlayer: CorePlayerFeature {
         }
         
         if let player = player {
-            var rlt = player.ccurrentTime()
-            let d = playerItem?.cduration() ?? 0
+            var rlt = player.CurrentTime()
+            let d = playerItem?.Duration ?? 0
             
             if rlt > d {
                 rlt = d
@@ -962,7 +942,7 @@ extension CorePlayer: CorePlayerFeature {
         }
         
         unobservePlayed()
-        cpmoduleManager.startSeek(time)
+        moduleManager.startSeek(time)
     }
     
     public func seekTo(time: NSTimeInterval) {
@@ -984,7 +964,7 @@ extension CorePlayer: CorePlayerFeature {
             }
         })
         
-        cpmoduleManager.seekTo(time)
+        moduleManager.seekTo(time)
     }
     
     public func endSeek(time: NSTimeInterval) {
@@ -997,7 +977,7 @@ extension CorePlayer: CorePlayerFeature {
         }
         
         var isend = false
-        let end = playerItem!.cduration()
+        let end = playerItem!.Duration
         
         if (isfinite(end) && fabs(time - end) < 0.5) {
             if (playerstate.seeking) {
@@ -1005,10 +985,10 @@ extension CorePlayer: CorePlayerFeature {
             }
             
             isend = true
-            cpmoduleManager.endSeek(time, isEnd:isend)
+            moduleManager.endSeek(time, isEnd:isend)
             seekToEnd()
         } else {
-            cpmoduleManager.endSeek(time, isEnd:isend)
+            moduleManager.endSeek(time, isEnd:isend)
         }
     }
     

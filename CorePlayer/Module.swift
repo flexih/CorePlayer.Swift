@@ -11,7 +11,7 @@ import Foundation
 public struct Module: ModuleDelegate {
     
     public weak var moduleManager: ModuleManager?
-//    public weak var moduleDelegate: Feature?
+    public weak var moduleDelegate: CorePlayerFeature?
 
     public func initModule() {
     }

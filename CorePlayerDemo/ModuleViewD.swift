@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModuleView: CPModuleView {
+class ModuleViewD: CPModuleView {
     
     let button = UIButton()
     
@@ -28,7 +28,7 @@ class ModuleView: CPModuleView {
     override func initModule() {
         NSLog("initModule")
         button.backgroundColor = UIColor.blueColor()
-        button.addTarget(self, action: #selector(ModuleView.buttonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(buttonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         button.setTitle("Pause", forState: UIControlState.Normal)
         button.setTitle("Play", forState: UIControlState.Selected)
         self.addSubview(button)

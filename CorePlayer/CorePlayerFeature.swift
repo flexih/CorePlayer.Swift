@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-@objc public protocol CorePlayerFeature: NSObjectProtocol {
+public protocol CorePlayerFeature: NSObjectProtocol {
     
     var scaleFill: Bool { get set }
     #if os(iOS)
@@ -21,10 +21,10 @@ import AVFoundation
     func appendURL(URL: NSURL)
     
     func avplayer() -> AVPlayer?
-    func moduleManager() -> CPModuleManager
     
     func view() -> UXView
-    func playerView() -> UXView
+    func playerview() -> UXView
+    var moduleManager: ModuleManager { get }
     
     func cpu() -> CPURL?
     func duration() -> NSTimeInterval

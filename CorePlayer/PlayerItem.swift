@@ -23,4 +23,14 @@ extension AVPlayerItem {
         
         return isfinite(duration) ? duration : 0
     }
+    
+    var Playable: NSTimeInterval {
+        guard !loadedTimeRanges.isEmpty else { return 0 }
+        
+        let range = loadedTimeRanges.first!.CMTimeRangeValue
+        let rangeTime = CMTimeAdd(range.start, range.duration)
+        
+        return CMTimeGetSeconds(rangeTime)
+    }
+    
 }
