@@ -11,7 +11,7 @@ import AVFoundation
 #if os(iOS)
 
 protocol InterruptionDelegate: class {
-    func interrupt(reason: InterruptionReason)
+    func interrupt(reason: CorePlayer.InterruptionReason)
 }
 
 class Interruption {

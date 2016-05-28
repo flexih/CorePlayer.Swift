@@ -14,7 +14,7 @@ public class CPModuleView: UXView, ModuleViewDelegate {
     public var moduelIndex: Int = 0
     public var moduleShow: Bool = false
 
-    public func moduleType() -> ModuleType {
+    public func moduleType() -> CorePlayer.ModuleType {
         return .View
     }
     

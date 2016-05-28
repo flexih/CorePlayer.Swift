@@ -14,34 +14,6 @@
     public typealias UXView = NSView
 #endif
 
-public enum CPState: Int {
-    case None       = 0
-    case AssetReady = 1
-    case ItemReady  = 2
-    case PlayReady  = 3
-    case End        = 4
-    case Failed     = 5
-    case Error      = 6
-    case Stop       = 7
-}
-
-public enum CPError: Int {
-    case URLError = -1000
-    case Error    = -1001
-}
-
-public enum ModuleType: Int {
-    case Feature = 1
-    case View    = 2
-}
-
-public enum InterruptionReason: Int {
-    case NewDeviceAvailable   = 1 /// earphone pulgged in
-    case OldDeviceUnavailable = 2   /// earphone pulgged out
-    case AudioSessionBegan    = 3      /// message alert, calendar alert, etc.
-    case AudioSessionEnd      = 4
-}
-
 public protocol ModuleDelegate {
 
     weak var moduleManager: ModuleManager? { get set }
@@ -52,7 +24,7 @@ public protocol ModuleDelegate {
     */
     func initModule()
     func deinitModule()
-    func moduleType() -> ModuleType
+    func moduleType() -> CorePlayer.ModuleType
     
     /**
      At least one URL setted, about to play
@@ -73,7 +45,7 @@ public protocol ModuleDelegate {
      Play ends
      -parameter state: end state, might be error, see CPState
     */
-    func endPlayCode(state: CPState)
+    func endPlayCode(state: CorePlayer.CPState)
     
     /**
      Each URL will notify its play state, if different handles needed
@@ -130,12 +102,12 @@ public protocol ModuleDelegate {
     /**
      Interrupted by reasons, see InterruptionReason
     */
-    func interrupt(reason: InterruptionReason)
+    func interrupt(reason: CorePlayer.InterruptionReason)
     
     /**
      Error happens, stop playing, see endPlayCode: too
     */
-    func error(err: CPError)
+    func error(err: CorePlayer.CPError)
 }
 
 extension ModuleDelegate {
@@ -146,7 +118,7 @@ extension ModuleDelegate {
     public func deinitModule() {
     }
 
-    public func moduleType() -> ModuleType {
+    public func moduleType() -> CorePlayer.ModuleType {
         return .Feature
     }
 
@@ -159,7 +131,7 @@ extension ModuleDelegate {
     public func cancelPlay() {
     }
 
-    public func endPlayCode(state: CPState) {
+    public func endPlayCode(state: CorePlayer.CPState) {
     }
 
     public func willSection(cpu: CPURL) {
@@ -213,10 +185,10 @@ extension ModuleDelegate {
     public func airplayShift(on: Bool) {
     }
 
-    public func interrupt(reason: InterruptionReason) {
+    public func interrupt(reason: CorePlayer.InterruptionReason) {
     }
 
-    public func error(err: CPError) {
+    public func error(err: CorePlayer.CPError) {
     }
 
 }

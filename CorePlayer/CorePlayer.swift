@@ -14,6 +14,34 @@ import AVFoundation
 #endif
 
 public class CorePlayer: NSObject {
+    
+    public enum CPState: Int {
+        case None       = 0
+        case AssetReady = 1
+        case ItemReady  = 2
+        case PlayReady  = 3
+        case End        = 4
+        case Failed     = 5
+        case Error      = 6
+        case Stop       = 7
+    }
+    
+    public enum CPError: Int {
+        case URLError = -1000
+        case Error    = -1001
+    }
+    
+    public enum ModuleType: Int {
+        case Feature = 1
+        case View    = 2
+    }
+    
+    public enum InterruptionReason: Int {
+        case NewDeviceAvailable   = 1 /// earphone pulgged in
+        case OldDeviceUnavailable = 2 /// earphone pulgged out
+        case AudioSessionBegan    = 3 /// message alert, calendar alert, etc.
+        case AudioSessionEnd      = 4
+    }
 
     private struct Keys {
         static let Tracks           = "tracks"

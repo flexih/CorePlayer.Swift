@@ -57,7 +57,7 @@ class ModuleViewD: CPModuleView {
         NSLog("cancelPlay")
     }
     
-    func endPlayCode(state: CPState) {
+    func endPlayCode(state: CorePlayer.CPState) {
         NSLog("endPlayCode")
     }
     
@@ -129,7 +129,7 @@ class ModuleViewD: CPModuleView {
         NSLog("airplayShift")
     }
     
-    func interrupt(reason: InterruptionReason) {
+    func interrupt(reason: CorePlayer.InterruptionReason) {
         NSLog("interrupt")
     }
     
