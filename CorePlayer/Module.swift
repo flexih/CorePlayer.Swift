@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Module: ModuleDelegate {
+public class Module: ModuleDelegate {
     
     public weak var moduleManager: ModuleManager?
     public weak var moduleDelegate: CorePlayerFeature?

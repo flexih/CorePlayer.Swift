@@ -27,11 +27,15 @@ extension ModuleViewDelegate where Self: UXView {
     }
 
     public func willShow() {
+        #if os(iOS)
         alpha = 1
+        #endif
     }
 
     public func willHide() {
+        #if os(iOS)
         alpha = 0
+        #endif
     }
 
 }

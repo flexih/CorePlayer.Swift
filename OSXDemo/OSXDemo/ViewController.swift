@@ -15,7 +15,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        corePlayer.moduleManager().initModules([EventModule.self])
+        corePlayer.moduleManager.initModules([EventModule()])
         corePlayer.view().translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(corePlayer.view())

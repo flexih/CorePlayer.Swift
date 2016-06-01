@@ -8,26 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		7125436B1C171AB20067C83F /* EventModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125436A1C171AB20067C83F /* EventModule.swift */; };
+		715469371CFEF1E9005CFB70 /* AVURLAsset+CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469291CFEF1E9005CFB70 /* AVURLAsset+CPURL.swift */; };
+		715469381CFEF1E9005CFB70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7154692A1CFEF1E9005CFB70 /* ContentView.swift */; };
+		715469391CFEF1E9005CFB70 /* CorePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7154692B1CFEF1E9005CFB70 /* CorePlayer.swift */; };
+		7154693A1CFEF1E9005CFB70 /* CorePlayerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7154692C1CFEF1E9005CFB70 /* CorePlayerFeature.swift */; };
+		7154693B1CFEF1E9005CFB70 /* CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7154692D1CFEF1E9005CFB70 /* CPURL.swift */; };
+		7154693C1CFEF1E9005CFB70 /* Interruption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7154692E1CFEF1E9005CFB70 /* Interruption.swift */; };
+		7154693D1CFEF1E9005CFB70 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7154692F1CFEF1E9005CFB70 /* Module.swift */; };
+		7154693E1CFEF1E9005CFB70 /* ModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469301CFEF1E9005CFB70 /* ModuleDelegate.swift */; };
+		7154693F1CFEF1E9005CFB70 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469311CFEF1E9005CFB70 /* ModuleManager.swift */; };
+		715469401CFEF1E9005CFB70 /* ModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469321CFEF1E9005CFB70 /* ModuleView.swift */; };
+		715469411CFEF1E9005CFB70 /* ModuleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469331CFEF1E9005CFB70 /* ModuleViewDelegate.swift */; };
+		715469421CFEF1E9005CFB70 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469341CFEF1E9005CFB70 /* Player.swift */; };
+		715469431CFEF1E9005CFB70 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469351CFEF1E9005CFB70 /* PlayerItem.swift */; };
+		715469441CFEF1E9005CFB70 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715469361CFEF1E9005CFB70 /* PlayerView.swift */; };
 		71FB5B4E1C16C64200C9E45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */; };
 		71FB5B501C16C64200C9E45D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4F1C16C64200C9E45D /* ViewController.swift */; };
 		71FB5B521C16C64200C9E45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5B511C16C64200C9E45D /* Assets.xcassets */; };
 		71FB5B551C16C64200C9E45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5B531C16C64200C9E45D /* Main.storyboard */; };
 		71FB5B601C16C64200C9E45D /* OSXDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B5F1C16C64200C9E45D /* OSXDemoTests.swift */; };
 		71FB5B6B1C16C64200C9E45D /* OSXDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B6A1C16C64200C9E45D /* OSXDemoUITests.swift */; };
-		71FB5B871C16C65800C9E45D /* AVURLAsset+CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B791C16C65800C9E45D /* AVURLAsset+CPURL.swift */; };
-		71FB5B881C16C65800C9E45D /* CorePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B7A1C16C65800C9E45D /* CorePlayer.swift */; };
-		71FB5B891C16C65800C9E45D /* CorePlayerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B7B1C16C65800C9E45D /* CorePlayerFeature.swift */; };
-		71FB5B8A1C16C65800C9E45D /* CPContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B7C1C16C65800C9E45D /* CPContentView.swift */; };
-		71FB5B8B1C16C65800C9E45D /* CPInterruption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B7D1C16C65800C9E45D /* CPInterruption.swift */; };
-		71FB5B8C1C16C65800C9E45D /* CPModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B7E1C16C65800C9E45D /* CPModule.swift */; };
-		71FB5B8D1C16C65800C9E45D /* CPModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B7F1C16C65800C9E45D /* CPModuleDelegate.swift */; };
-		71FB5B8E1C16C65800C9E45D /* CPModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B801C16C65800C9E45D /* CPModuleManager.swift */; };
-		71FB5B8F1C16C65800C9E45D /* CPModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B811C16C65800C9E45D /* CPModuleView.swift */; };
-		71FB5B901C16C65800C9E45D /* CPModuleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B821C16C65800C9E45D /* CPModuleViewDelegate.swift */; };
-		71FB5B911C16C65800C9E45D /* CPPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B831C16C65800C9E45D /* CPPlayer.swift */; };
-		71FB5B921C16C65800C9E45D /* CPPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B841C16C65800C9E45D /* CPPlayerItem.swift */; };
-		71FB5B931C16C65800C9E45D /* CPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B851C16C65800C9E45D /* CPPlayerView.swift */; };
-		71FB5B941C16C65800C9E45D /* CPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B861C16C65800C9E45D /* CPURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +49,20 @@
 
 /* Begin PBXFileReference section */
 		7125436A1C171AB20067C83F /* EventModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModule.swift; sourceTree = "<group>"; };
+		715469291CFEF1E9005CFB70 /* AVURLAsset+CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVURLAsset+CPURL.swift"; sourceTree = "<group>"; };
+		7154692A1CFEF1E9005CFB70 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7154692B1CFEF1E9005CFB70 /* CorePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlayer.swift; sourceTree = "<group>"; };
+		7154692C1CFEF1E9005CFB70 /* CorePlayerFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlayerFeature.swift; sourceTree = "<group>"; };
+		7154692D1CFEF1E9005CFB70 /* CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPURL.swift; sourceTree = "<group>"; };
+		7154692E1CFEF1E9005CFB70 /* Interruption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interruption.swift; sourceTree = "<group>"; };
+		7154692F1CFEF1E9005CFB70 /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
+		715469301CFEF1E9005CFB70 /* ModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleDelegate.swift; sourceTree = "<group>"; };
+		715469311CFEF1E9005CFB70 /* ModuleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManager.swift; sourceTree = "<group>"; };
+		715469321CFEF1E9005CFB70 /* ModuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleView.swift; sourceTree = "<group>"; };
+		715469331CFEF1E9005CFB70 /* ModuleViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleViewDelegate.swift; sourceTree = "<group>"; };
+		715469341CFEF1E9005CFB70 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		715469351CFEF1E9005CFB70 /* PlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
+		715469361CFEF1E9005CFB70 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		71FB5B4A1C16C64200C9E45D /* OSXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSXDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71FB5B4F1C16C64200C9E45D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,20 +75,6 @@
 		71FB5B661C16C64200C9E45D /* OSXDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSXDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB5B6A1C16C64200C9E45D /* OSXDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSXDemoUITests.swift; sourceTree = "<group>"; };
 		71FB5B6C1C16C64200C9E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71FB5B791C16C65800C9E45D /* AVURLAsset+CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVURLAsset+CPURL.swift"; sourceTree = "<group>"; };
-		71FB5B7A1C16C65800C9E45D /* CorePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlayer.swift; sourceTree = "<group>"; };
-		71FB5B7B1C16C65800C9E45D /* CorePlayerFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlayerFeature.swift; sourceTree = "<group>"; };
-		71FB5B7C1C16C65800C9E45D /* CPContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPContentView.swift; sourceTree = "<group>"; };
-		71FB5B7D1C16C65800C9E45D /* CPInterruption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPInterruption.swift; sourceTree = "<group>"; };
-		71FB5B7E1C16C65800C9E45D /* CPModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModule.swift; sourceTree = "<group>"; };
-		71FB5B7F1C16C65800C9E45D /* CPModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModuleDelegate.swift; sourceTree = "<group>"; };
-		71FB5B801C16C65800C9E45D /* CPModuleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModuleManager.swift; sourceTree = "<group>"; };
-		71FB5B811C16C65800C9E45D /* CPModuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModuleView.swift; sourceTree = "<group>"; };
-		71FB5B821C16C65800C9E45D /* CPModuleViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPModuleViewDelegate.swift; sourceTree = "<group>"; };
-		71FB5B831C16C65800C9E45D /* CPPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayer.swift; sourceTree = "<group>"; };
-		71FB5B841C16C65800C9E45D /* CPPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayerItem.swift; sourceTree = "<group>"; };
-		71FB5B851C16C65800C9E45D /* CPPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPlayerView.swift; sourceTree = "<group>"; };
-		71FB5B861C16C65800C9E45D /* CPURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,20 +157,20 @@
 		71FB5B781C16C65800C9E45D /* CorePlayer */ = {
 			isa = PBXGroup;
 			children = (
-				71FB5B791C16C65800C9E45D /* AVURLAsset+CPURL.swift */,
-				71FB5B7A1C16C65800C9E45D /* CorePlayer.swift */,
-				71FB5B7B1C16C65800C9E45D /* CorePlayerFeature.swift */,
-				71FB5B7C1C16C65800C9E45D /* CPContentView.swift */,
-				71FB5B7D1C16C65800C9E45D /* CPInterruption.swift */,
-				71FB5B7E1C16C65800C9E45D /* CPModule.swift */,
-				71FB5B7F1C16C65800C9E45D /* CPModuleDelegate.swift */,
-				71FB5B801C16C65800C9E45D /* CPModuleManager.swift */,
-				71FB5B811C16C65800C9E45D /* CPModuleView.swift */,
-				71FB5B821C16C65800C9E45D /* CPModuleViewDelegate.swift */,
-				71FB5B831C16C65800C9E45D /* CPPlayer.swift */,
-				71FB5B841C16C65800C9E45D /* CPPlayerItem.swift */,
-				71FB5B851C16C65800C9E45D /* CPPlayerView.swift */,
-				71FB5B861C16C65800C9E45D /* CPURL.swift */,
+				715469291CFEF1E9005CFB70 /* AVURLAsset+CPURL.swift */,
+				7154692A1CFEF1E9005CFB70 /* ContentView.swift */,
+				7154692B1CFEF1E9005CFB70 /* CorePlayer.swift */,
+				7154692C1CFEF1E9005CFB70 /* CorePlayerFeature.swift */,
+				7154692D1CFEF1E9005CFB70 /* CPURL.swift */,
+				7154692E1CFEF1E9005CFB70 /* Interruption.swift */,
+				7154692F1CFEF1E9005CFB70 /* Module.swift */,
+				715469301CFEF1E9005CFB70 /* ModuleDelegate.swift */,
+				715469311CFEF1E9005CFB70 /* ModuleManager.swift */,
+				715469321CFEF1E9005CFB70 /* ModuleView.swift */,
+				715469331CFEF1E9005CFB70 /* ModuleViewDelegate.swift */,
+				715469341CFEF1E9005CFB70 /* Player.swift */,
+				715469351CFEF1E9005CFB70 /* PlayerItem.swift */,
+				715469361CFEF1E9005CFB70 /* PlayerView.swift */,
 			);
 			name = CorePlayer;
 			path = ../../CorePlayer;
@@ -306,23 +306,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71FB5B921C16C65800C9E45D /* CPPlayerItem.swift in Sources */,
-				71FB5B911C16C65800C9E45D /* CPPlayer.swift in Sources */,
+				715469401CFEF1E9005CFB70 /* ModuleView.swift in Sources */,
+				715469371CFEF1E9005CFB70 /* AVURLAsset+CPURL.swift in Sources */,
+				7154693C1CFEF1E9005CFB70 /* Interruption.swift in Sources */,
+				715469381CFEF1E9005CFB70 /* ContentView.swift in Sources */,
+				715469441CFEF1E9005CFB70 /* PlayerView.swift in Sources */,
+				7154693F1CFEF1E9005CFB70 /* ModuleManager.swift in Sources */,
+				715469411CFEF1E9005CFB70 /* ModuleViewDelegate.swift in Sources */,
+				7154693D1CFEF1E9005CFB70 /* Module.swift in Sources */,
+				715469431CFEF1E9005CFB70 /* PlayerItem.swift in Sources */,
 				71FB5B501C16C64200C9E45D /* ViewController.swift in Sources */,
-				71FB5B8D1C16C65800C9E45D /* CPModuleDelegate.swift in Sources */,
-				71FB5B891C16C65800C9E45D /* CorePlayerFeature.swift in Sources */,
-				71FB5B8C1C16C65800C9E45D /* CPModule.swift in Sources */,
+				715469391CFEF1E9005CFB70 /* CorePlayer.swift in Sources */,
+				7154693B1CFEF1E9005CFB70 /* CPURL.swift in Sources */,
 				7125436B1C171AB20067C83F /* EventModule.swift in Sources */,
-				71FB5B8F1C16C65800C9E45D /* CPModuleView.swift in Sources */,
-				71FB5B8E1C16C65800C9E45D /* CPModuleManager.swift in Sources */,
-				71FB5B8B1C16C65800C9E45D /* CPInterruption.swift in Sources */,
-				71FB5B881C16C65800C9E45D /* CorePlayer.swift in Sources */,
-				71FB5B931C16C65800C9E45D /* CPPlayerView.swift in Sources */,
-				71FB5B901C16C65800C9E45D /* CPModuleViewDelegate.swift in Sources */,
-				71FB5B941C16C65800C9E45D /* CPURL.swift in Sources */,
-				71FB5B871C16C65800C9E45D /* AVURLAsset+CPURL.swift in Sources */,
+				7154693A1CFEF1E9005CFB70 /* CorePlayerFeature.swift in Sources */,
 				71FB5B4E1C16C64200C9E45D /* AppDelegate.swift in Sources */,
-				71FB5B8A1C16C65800C9E45D /* CPContentView.swift in Sources */,
+				715469421CFEF1E9005CFB70 /* Player.swift in Sources */,
+				7154693E1CFEF1E9005CFB70 /* ModuleDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

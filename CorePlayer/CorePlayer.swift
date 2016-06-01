@@ -88,12 +88,12 @@ public class CorePlayer: NSObject {
     private var playerView: PlayerView
     private var playerItem: AVPlayerItem?
     private var playerAsset: AVURLAsset?
-    private var backPlayer: Player?
+    private var backPlayer: AVPlayer?
     private var backView: PlayerView?
     private var playedObserver: AnyObject?
     private var cpus: Array<CPURL> = []
     private var cpi: Int = 0
-    private var player: Player? {
+    private var player: AVPlayer? {
         willSet {
             if player != nil {
                 deregisterPlayerEvent()
@@ -568,7 +568,7 @@ public class CorePlayer: NSObject {
             let asset = AVURLAsset(CPU: cpu)
             let playerItem = AVPlayerItem(asset: asset)
             
-            backPlayer = Player(playerItem: playerItem)
+            backPlayer = AVPlayer(playerItem: playerItem)
             backPlayer!.actionAtItemEnd = .Pause
             #if os(iOS)
                 backPlayer!.allowsExternalPlayback = false
@@ -597,7 +597,7 @@ public class CorePlayer: NSObject {
             
         } else if keyPath == Keys.Rate {
             let rate = (change?[NSKeyValueChangeNewKey] as! NSNumber).floatValue
-            let isPlay = Player.isRatePlaying(rate)
+            let isPlay = AVPlayer.isRatePlaying(rate)
             
             if isPlay {
                 if playedObserver == nil {
@@ -845,7 +845,7 @@ extension CorePlayer: CorePlayerFeature {
         
         registerPlayerItemEvent()
         
-        player = Player(playerItem: playerItem! as AVPlayerItem)
+        player = AVPlayer(playerItem: playerItem! as AVPlayerItem)
         player!.actionAtItemEnd = .Pause
         #if os(iOS)
         player!.allowsExternalPlayback = allowAirPlay

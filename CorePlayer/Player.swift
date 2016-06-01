@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-class Player: AVPlayer {
+extension AVPlayer {
 
     class func isRatePlaying(rate: Float) -> Bool {
         return rate > 0
