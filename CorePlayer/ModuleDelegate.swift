@@ -110,6 +110,7 @@ public protocol ModuleDelegate {
     func error(err: CorePlayer.CPError)
 }
 
+///make optional
 extension ModuleDelegate {
 
     public func initModule() {

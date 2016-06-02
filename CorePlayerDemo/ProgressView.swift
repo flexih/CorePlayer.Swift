@@ -8,11 +8,17 @@
 
 import UIKit
 
-class ProgressView: CPModuleView {
+class ProgressView: UIView, ModuleViewDelegate {
+    
+    weak var moduleManager: ModuleManager?
+    weak var moduleDelegate: CorePlayerFeature?
+    
+    var moduelIndex: Int = 0
+    var moduleShow: Bool = false
 
     let lable = UILabel()
 
-    override func layoutView() {
+    func layoutView() {
         self.frame = CGRectMake(CGRectGetWidth(self.superview!.bounds) - 120, 0, 120, 50)
     }
 
@@ -21,7 +27,7 @@ class ProgressView: CPModuleView {
         lable.frame = self.bounds
     }
 
-    override func initModule() {
+    func initModule() {
         self.backgroundColor = UIColor.blueColor()
         lable.textColor = UIColor.whiteColor()
         lable.backgroundColor = UIColor.clearColor()

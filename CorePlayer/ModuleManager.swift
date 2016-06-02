@@ -174,6 +174,22 @@ extension ModuleManager: ModuleDelegate {
             }
         }
     }
+    
+    public func willShow() {
+        modules.forEach {
+            if let m = $0 as? ModuleViewDelegate {
+                m.willShow()
+            }
+        }
+    }
+    
+    public func willHide() {
+        modules.forEach {
+            if let m = $0 as? ModuleViewDelegate {
+                m.willHide()
+            }
+        }
+    }
 }
 
 #if os(iOS)

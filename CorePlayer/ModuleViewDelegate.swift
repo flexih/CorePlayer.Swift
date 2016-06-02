@@ -6,7 +6,11 @@
 //  Copyright (c) 2015 flexih. All rights reserved.
 //
 
-import Foundation
+#if os(iOS)
+    import UIKit
+#else
+    import AppKit
+#endif
 
 public protocol ModuleViewDelegate: ModuleDelegate {
     
@@ -38,4 +42,7 @@ extension ModuleViewDelegate where Self: UXView {
         #endif
     }
 
+    public func moduleType() -> CorePlayer.ModuleType {
+        return .View
+    }
 }

@@ -8,7 +8,13 @@
 
 import UIKit
 
-class ModuleViewD: CPModuleView {
+class ModuleViewD: UIView, ModuleViewDelegate {
+    
+    weak var moduleManager: ModuleManager?
+    weak var moduleDelegate: CorePlayerFeature?
+    
+    var moduelIndex: Int = 0
+    var moduleShow: Bool = false
     
     let button = UIButton()
     
@@ -16,7 +22,7 @@ class ModuleViewD: CPModuleView {
         NSLog("willplay")
     }
     
-    override func layoutView() {
+    func layoutView() {
         self.frame = CGRectMake(0, 0, 100, 50)
     }
     
@@ -25,7 +31,7 @@ class ModuleViewD: CPModuleView {
         button.frame = self.bounds
     }
     
-    override func initModule() {
+    func initModule() {
         NSLog("initModule")
         button.backgroundColor = UIColor.blueColor()
         button.addTarget(self, action: #selector(buttonClicked), forControlEvents: UIControlEvents.TouchUpInside)
@@ -45,7 +51,7 @@ class ModuleViewD: CPModuleView {
         }
     }
     
-    override func deinitModule() {
+    func deinitModule() {
         NSLog("deinitModule")
     }
 
