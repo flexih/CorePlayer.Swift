@@ -15,9 +15,7 @@
 extension CorePlayer: ContentLayoutManager {
     
     func contentsLayout(view: UXView) {
-        let v: UXView = view.subviews[0]
-        
-        if v is PlayerView {
+        if let v = view.subviews.first as? PlayerView {
             v.frame = view.bounds
         }
         
