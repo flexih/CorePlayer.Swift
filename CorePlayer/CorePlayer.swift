@@ -80,6 +80,24 @@ public class CorePlayer: NSObject {
         var seekhead  = false
     }
 
+    private struct URL {
+      let URL: CPURL
+      let asset: AVURLAsset
+      var didSeekHead = false
+
+      func preload() {
+        asset.loadValuesAsynchronouslyForKeys(["status"], completionHandler: nil)
+      }
+
+      func cancelLoading() {
+
+      }
+
+      func deinit() {
+        cancelLoading()
+      }
+    }
+
     private var keyobserver = KeyObserver()
     private var playerstate = PlayerState()
 
