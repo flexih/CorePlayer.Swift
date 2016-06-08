@@ -18,19 +18,16 @@ public class ModuleManager {
     public weak var moduleDelegate: CorePlayerFeature?
 
     private var modules: Array<ModuleDelegate> = []
-    
+
     public func deinitModule() {
-        for module in modules {
-            module.deinitModule()
-        }
-        
+        modules.forEach { $0.deinitModule() }
         modules.removeAll()
     }
-    
+
     public func initModules(modules: Array<ModuleDelegate>) {
         registerModules(modules)
     }
-    
+
     public func registerModules(newModules: Array<ModuleDelegate>) {
 
         newModules.forEach {
@@ -41,10 +38,7 @@ public class ModuleManager {
         }
 
         modules.sortInPlace(moduleSorter)
-        
-        for module in newModules.sort(moduleSorter) {
-            module.initModule()
-        }
+        newModules.sort(moduleSorter).forEach { $0.initModule() }
     }
 
     private func moduleSorter (lhs: ModuleDelegate, rhs: ModuleDelegate) -> Bool {
@@ -109,7 +103,7 @@ extension ModuleManager: ModuleDelegate {
     public func appActive() {
         modules.forEach { $0.appActive() }
     }
-    
+
     public func endPlayCode(state: CorePlayer.State) {
         modules.forEach { $0.endPlayCode(state) }
     }
@@ -174,7 +168,7 @@ extension ModuleManager: ModuleDelegate {
             }
         }
     }
-    
+
     public func willShow() {
         modules.forEach {
             if let m = $0 as? ModuleViewDelegate {
@@ -182,7 +176,7 @@ extension ModuleManager: ModuleDelegate {
             }
         }
     }
-    
+
     public func willHide() {
         modules.forEach {
             if let m = $0 as? ModuleViewDelegate {
@@ -194,16 +188,16 @@ extension ModuleManager: ModuleDelegate {
 
 #if os(iOS)
 extension ModuleManager {
-    
+
     public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
     }
-    
+
     public func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
     }
-    
+
     public func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
     }
-    
+
     public func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
     }
 
@@ -215,46 +209,46 @@ extension ModuleManager {
 
     public func mouseDown(theEvent: NSEvent) {
     }
-    
+
     public func rightMouseDown(theEvent: NSEvent) {
     }
-    
+
     public func otherMouseDown(theEvent: NSEvent) {
     }
-    
+
     public func mouseUp(theEvent: NSEvent) {
     }
-    
+
     public func rightMouseUp(theEvent: NSEvent) {
     }
-    
+
     public func otherMouseUp(theEvent: NSEvent) {
     }
-    
+
     public func mouseMoved(theEvent: NSEvent) {
     }
-    
+
     public func mouseDragged(theEvent: NSEvent) {
     }
-    
+
     public func scrollWheel(theEvent: NSEvent) {
     }
-    
+
     public func rightMouseDragged(theEvent: NSEvent) {
     }
-    
+
     public func otherMouseDragged(theEvent: NSEvent) {
     }
-    
+
     public func mouseEntered(theEvent: NSEvent) {
     }
-    
+
     public func mouseExited(theEvent: NSEvent) {
     }
-    
+
     public func keyDown(theEvent: NSEvent) {
     }
-    
+
     public func keyUp(theEvent: NSEvent) {
     }
 
