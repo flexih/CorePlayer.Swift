@@ -63,7 +63,7 @@ class ModuleViewD: UIView, ModuleViewDelegate {
         NSLog("cancelPlay")
     }
     
-    func endPlayCode(state: CorePlayer.CPState) {
+    func endPlayCode(state: CorePlayer.State) {
         NSLog("endPlayCode")
     }
     

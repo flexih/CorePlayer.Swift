@@ -35,11 +35,11 @@ class EventModule: Module {
         print("endPend")
     }
 
-    func error(err: CorePlayer.CPError) {
+    func error(err: CorePlayer.Error) {
         print("error:\(err.rawValue)")
     }
 
-    func endPlayCode(errCode: CorePlayer.CPState) {
+    func endPlayCode(errCode: CorePlayer.State) {
         print("endPlayCode:\(errCode.rawValue)")
     }
 

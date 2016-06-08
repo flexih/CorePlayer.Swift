@@ -110,7 +110,7 @@ extension ModuleManager: ModuleDelegate {
         modules.forEach { $0.appActive() }
     }
     
-    public func endPlayCode(state: CorePlayer.CPState) {
+    public func endPlayCode(state: CorePlayer.State) {
         modules.forEach { $0.endPlayCode(state) }
     }
 
@@ -154,7 +154,7 @@ extension ModuleManager: ModuleDelegate {
         modules.forEach { $0.playable(duration) }
     }
 
-    public func error(err: CorePlayer.CPError) {
+    public func error(err: CorePlayer.Error) {
         modules.forEach { $0.error(err) }
     }
 

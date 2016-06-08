@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7119DCF81AE4ECEC00185672 /* ModuleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119DCF71AE4ECEC00185672 /* ModuleViewDelegate.swift */; };
 		7119DCFE1AE4F50A00185672 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119DCFD1AE4F50A00185672 /* ModuleManager.swift */; };
+		7163A1AF1D054CC300779593 /* CorePlayer+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7163A1AE1D054CC200779593 /* CorePlayer+Feature.swift */; };
 		716B06541CF9DE690016679B /* CorePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119DD051AE5C89B00185672 /* CorePlayer.swift */; };
 		716B06551CF9DFE50016679B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119DD031AE5C07800185672 /* ContentView.swift */; };
 		716B06561CF9E1B70016679B /* CorePlayerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119DCFF1AE4FD9200185672 /* CorePlayerFeature.swift */; };
@@ -49,6 +50,7 @@
 		7119DD051AE5C89B00185672 /* CorePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlayer.swift; sourceTree = "<group>"; };
 		7127F2F71ADF3C7600DEEC26 /* PlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
 		7127F2F91ADF42E800DEEC26 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		7163A1AE1D054CC200779593 /* CorePlayer+Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CorePlayer+Feature.swift"; sourceTree = "<group>"; };
 		716B06591D006B4E0016679B /* CorePlayer+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CorePlayer+Internal.swift"; sourceTree = "<group>"; };
 		71AF8A3C1ADD38D200228A3D /* CorePlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorePlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71AF8A401ADD38D200228A3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				7119DCFF1AE4FD9200185672 /* CorePlayerFeature.swift */,
 				7119DD051AE5C89B00185672 /* CorePlayer.swift */,
 				716B06591D006B4E0016679B /* CorePlayer+Internal.swift */,
+				7163A1AE1D054CC200779593 /* CorePlayer+Feature.swift */,
 			);
 			path = CorePlayer;
 			sourceTree = SOURCE_ROOT;
@@ -300,6 +303,7 @@
 				7119DCF81AE4ECEC00185672 /* ModuleViewDelegate.swift in Sources */,
 				716B06541CF9DE690016679B /* CorePlayer.swift in Sources */,
 				71A4CC9D1CF83AC80030A6C7 /* PlayerView.swift in Sources */,
+				7163A1AF1D054CC300779593 /* CorePlayer+Feature.swift in Sources */,
 				71AF8A421ADD38D200228A3D /* AppDelegate.swift in Sources */,
 				716B06551CF9DFE50016679B /* ContentView.swift in Sources */,
 				71A4CC9A1CF7F9090030A6C7 /* ViewController.swift in Sources */,

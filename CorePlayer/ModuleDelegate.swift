@@ -43,9 +43,9 @@ public protocol ModuleDelegate {
     
     /**
      Play ends
-     -parameter state: end state, might be error, see CPState
+     -parameter state: end state, might be error, see State
     */
-    func endPlayCode(state: CorePlayer.CPState)
+    func endPlayCode(state: CorePlayer.State)
     
     /**
      Each URL will notify its play state, if different handles needed
@@ -107,7 +107,7 @@ public protocol ModuleDelegate {
     /**
      Error happens, stop playing, see endPlayCode: too
     */
-    func error(err: CorePlayer.CPError)
+    func error(err: CorePlayer.Error)
 }
 
 ///make optional
@@ -132,7 +132,7 @@ extension ModuleDelegate {
     public func cancelPlay() {
     }
 
-    public func endPlayCode(state: CorePlayer.CPState) {
+    public func endPlayCode(state: CorePlayer.State) {
     }
 
     public func willSection(cpu: CPURL) {
@@ -189,7 +189,7 @@ extension ModuleDelegate {
     public func interrupt(reason: CorePlayer.InterruptionReason) {
     }
 
-    public func error(err: CorePlayer.CPError) {
+    public func error(err: CorePlayer.Error) {
     }
 
 }

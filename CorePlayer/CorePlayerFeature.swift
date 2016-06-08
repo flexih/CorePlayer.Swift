@@ -29,7 +29,7 @@ public protocol CorePlayerFeature: NSObjectProtocol {
     func cpu() -> CPURL?
     func duration() -> NSTimeInterval
     func played() -> NSTimeInterval
-    func state() -> CorePlayer.CPState
+    func state() -> CorePlayer.State
     func presentationSize() -> CGSize
     
     func isPending() -> Bool
