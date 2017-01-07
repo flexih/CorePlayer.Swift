@@ -11,17 +11,17 @@ import AVFoundation
 
 class CPPlayerItem: AVPlayerItem {
     
-    func URL() -> NSURL {
-        return (asset as! AVURLAsset).URL
+    func URL() -> Foundation.URL {
+        return (asset as! AVURLAsset).url
     }
     
-    func cduration() -> NSTimeInterval {
-        if status == .Unknown {
+    func cduration() -> TimeInterval {
+        if status == .unknown {
             return 0
         }
         
         let duration = CMTimeGetSeconds(asset.duration)
         
-        return isfinite(duration) ? duration : 0
+        return duration.isFinite ? duration : 0
     }
 }

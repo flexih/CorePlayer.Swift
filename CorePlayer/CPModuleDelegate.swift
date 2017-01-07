@@ -13,15 +13,15 @@
 #endif
 
 @objc public enum ModuleType: Int {
-    case Feature = 1
-    case View
+    case feature = 1
+    case view
 }
 
 @objc public enum InterruptionReason: Int {
-    case NewDeviceAvailable = 1 /// earphone pulgged in
-    case OldDeviceUnavailable   /// earphone pulgged out
-    case AudioSessionBegan      /// message alert, calendar alert, etc.
-    case AudioSessionEnd
+    case newDeviceAvailable = 1 /// earphone pulgged in
+    case oldDeviceUnavailable   /// earphone pulgged out
+    case audioSessionBegan      /// message alert, calendar alert, etc.
+    case audioSessionEnd
 }
 
 @objc public protocol CPModuleDelegate: NSObjectProtocol {
@@ -39,83 +39,83 @@
     /**
      At least one URL setted, about to play
     */
-    optional func willPlay()
+    @objc optional func willPlay()
     
     /**
      Just played
     */
-    optional func startPlay()
+    @objc optional func startPlay()
     
     /**
      Stopped even before any URL setted
     */
-    optional func cancelPlay()
+    @objc optional func cancelPlay()
     
     /**
      Play ends
      -parameter state: end state, might be error, see CPState
     */
-    optional func endPlayCode(state: CPState)
+    @objc optional func endPlayCode(_ state: CPState)
     
     /**
      Each URL will notify its play state, if different handles needed
     */
-    optional func willSection(cpu: CPURL)
-    optional func startSection(cpu: CPURL)
-    optional func endSection(cpu: CPURL)
+    @objc optional func willSection(_ cpu: CPURL)
+    @objc optional func startSection(_ cpu: CPURL)
+    @objc optional func endSection(_ cpu: CPURL)
     
-    optional func willPend()
-    optional func endPend()
+    @objc optional func willPend()
+    @objc optional func endPend()
     
-    optional func willPause()
-    optional func endPause()
+    @objc optional func willPause()
+    @objc optional func endPause()
     
-    optional func startSeek(time: NSTimeInterval)
-    optional func seekTo(time: NSTimeInterval)
-    optional func endSeek(time: NSTimeInterval, isEnd: Bool)
+    @objc optional func startSeek(_ time: TimeInterval)
+    @objc optional func seekTo(_ time: TimeInterval)
+    @objc optional func endSeek(_ time: TimeInterval, isEnd: Bool)
     
     /**
      -parameter duration: total duration, might be 0
     */
-    optional func durationAvailable(duration: NSTimeInterval)
+    @objc optional func durationAvailable(_ duration: TimeInterval)
     
     /**
      -parameter duration: played duration
     */
-    optional func played(duration: NSTimeInterval)
+    @objc optional func played(_ duration: TimeInterval)
     
     /**
      -parameter duration: preloaded duration
     */
-    optional func playable(duration: NSTimeInterval)
+    @objc optional func playable(_ duration: TimeInterval)
     
     /**
      UIApplicationWillResignActive
     */
-    optional func appResign()
+    @objc optional func appResign()
     
     /**
      UIApplicationDidBecomeActive
     */
-    optional func appActive()
+    @objc optional func appActive()
     
     /**
      -parameter size: presentation size
     */
-    optional func presentationSize(size: CGSize)
+    @objc optional func presentationSize(_ size: CGSize)
     
     /**
      AirPlay state changes
     */
-    optional func airplayShift(on: Bool)
+    @objc optional func airplayShift(_ on: Bool)
     
     /**
      Interrupted by reasons, see InterruptionReason
     */
-    optional func interrupt(reason: InterruptionReason)
+    @objc optional func interrupt(_ reason: InterruptionReason)
     
     /**
      Error happens, stop playing, see endPlayCode: too
     */
-    optional func error(err: CPError)
+    @objc optional func error(_ err: CPError)
 }

@@ -11,31 +11,31 @@ import AVFoundation
 #if os(iOS)
 
 protocol CPInterruptionDelegate: NSObjectProtocol {
-    func interrupt(reason: InterruptionReason)
+    func interrupt(_ reason: InterruptionReason)
 }
 
 class CPInterruption: NSObject {
     
     weak var delegate: CPInterruptionDelegate?
     
-    func observeInterruption(delegate: CPInterruptionDelegate) {
+    func observeInterruption(_ delegate: CPInterruptionDelegate) {
         self.delegate = delegate
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CPInterruption.interrupt(_:)), name: AVAudioSessionInterruptionNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CPInterruption.interrupt(_:)), name: NSNotification.Name.AVAudioSessionInterruption, object: nil)
     }
     
     func unobserver() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func interrupt(notification: NSNotification) {
-        if let info: NSDictionary = notification.userInfo {
-            if let type: UInt = info.objectForKey(AVAudioSessionInterruptionTypeKey) as? UInt {
-                if type == AVAudioSessionInterruptionType.Began.rawValue {
+    func interrupt(_ notification: Notification) {
+        if let info: NSDictionary = notification.userInfo as NSDictionary? {
+            if let type: UInt = info.object(forKey: AVAudioSessionInterruptionTypeKey) as? UInt {
+                if type == AVAudioSessionInterruptionType.began.rawValue {
                     beginInterrupt()
-                } else if type == AVAudioSessionInterruptionType.Ended.rawValue {
-                    if let _: UInt = info.objectForKey(AVAudioSessionInterruptionOptionKey) as? UInt {
-                        if type == AVAudioSessionInterruptionOptions.ShouldResume.rawValue {
+                } else if type == AVAudioSessionInterruptionType.ended.rawValue {
+                    if let _: UInt = info.object(forKey: AVAudioSessionInterruptionOptionKey) as? UInt {
+                        if type == AVAudioSessionInterruptionOptions.shouldResume.rawValue {
                             endInterrupt()
                         }
                     }
@@ -45,11 +45,11 @@ class CPInterruption: NSObject {
     }
     
     func beginInterrupt() {
-        delegate?.interrupt(.AudioSessionBegan)
+        delegate?.interrupt(.audioSessionBegan)
     }
     
     func endInterrupt() {
-        delegate?.interrupt(.AudioSessionEnd)
+        delegate?.interrupt(.audioSessionEnd)
     }
 }
 

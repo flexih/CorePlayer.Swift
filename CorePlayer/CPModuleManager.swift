@@ -12,45 +12,43 @@
     import AppKit
 #endif
 
-public class CPModuleManager: NSObject, CPModuleDelegate {
+open class CPModuleManager: NSObject, CPModuleDelegate {
     
-    public var moduleID: Int = 0
-    public weak var moduleManager: CPModuleManager?
-    public weak var moduleDelegate: CorePlayerFeature?
+    open var moduleID: Int = 0
+    open weak var moduleManager: CPModuleManager?
+    open weak var moduleDelegate: CorePlayerFeature?
     
-    public func moduleType() -> ModuleType {
-        return .Feature
+    open func moduleType() -> ModuleType {
+        return .feature
     }
     
     var moduleIndex: Int = 0
-    public var modules: Array<CPModuleDelegate> = []
+    open var modules: Array<CPModuleDelegate> = []
     
-    public func initModule() {
+    open func initModule() {
         
     }
     
-    public func deinitModule() {
+    open func deinitModule() {
         for module in modules {
             module.deinitModule()
         }
         
-        modules.removeAll(keepCapacity: true)
+        modules.removeAll(keepingCapacity: true)
     }
     
-    public func initModules(moduleClasses: Array<CPModuleDelegate.Type>) {
+    open func initModules(_ moduleClasses: Array<CPModuleDelegate.Type>) {
         addModules(moduleClasses)
     }
     
-    public func addModules(moduleClasses: Array<CPModuleDelegate.Type>) {
+    open func addModules(_ moduleClasses: Array<CPModuleDelegate.Type>) {
         var newModules: Array<CPModuleDelegate> = []
         
         for mclass in moduleClasses {
-            if let ctype: AnyObject.Type = mclass as AnyClass {
-                let otype: NSObject.Type = ctype as! NSObject.Type
-                
-                if let module: CPModuleDelegate? = otype.init() as? CPModuleDelegate {
-                    registerModule(module!)
-                    newModules.append(module!)
+            if let otype: NSObject.Type = mclass as? NSObject.Type {
+                if let module: CPModuleDelegate = otype.init() as? CPModuleDelegate {
+                    registerModule(module)
+                    newModules.append(module)
                 }
             }
         }
@@ -63,15 +61,15 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    func sortModules(inout modules: Array<CPModuleDelegate>) {
-        modules.sortInPlace { objc1, objc2 in
+    func sortModules(_ modules: inout Array<CPModuleDelegate>) {
+        modules.sort { objc1, objc2 in
             let type1 = (objc1.moduleType() as ModuleType).rawValue
             let type2 = (objc2.moduleType() as ModuleType).rawValue
             
             if type1 != type2 {
                 return type1 > type2
                 
-            } else if type1 == ModuleType.Feature.rawValue {
+            } else if type1 == ModuleType.feature.rawValue {
                 return false
                 
             } else {
@@ -83,7 +81,7 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         }
     }
     
-    func registerModule(module: CPModuleDelegate) {
+    func registerModule(_ module: CPModuleDelegate) {
         module.moduleID = moduleIndex
         moduleIndex += 1
         module.moduleDelegate = moduleDelegate
@@ -91,25 +89,25 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         modules.append(module)
     }
     
-    public func delModules(moduleClasses: Array<CPModuleDelegate.Type>) {
+    open func delModules(_ moduleClasses: Array<CPModuleDelegate.Type>) {
         for mclass in moduleClasses {
-            for (i, module) in modules.enumerate() {
-                if module.isMemberOfClass(mclass as AnyClass) {
-                    if module.moduleType() == .View {
+            for (i, module) in modules.enumerated() {
+                if module.isMember(of: mclass as AnyClass) {
+                    if module.moduleType() == .view {
                         (module as! UXView).removeFromSuperview()
                     }
                     
                     module.deinitModule()
-                    modules.removeAtIndex(i)
+                    modules.remove(at: i)
                     break
                 }
             }
         }
     }
     
-    public func moduleWithClass(moduleClass: CPModuleDelegate.Type) -> CPModuleDelegate? {
+    open func moduleWithClass(_ moduleClass: CPModuleDelegate.Type) -> CPModuleDelegate? {
         for module in modules {
-            if module.isMemberOfClass(moduleClass as AnyClass) {
+            if module.isMember(of: moduleClass as AnyClass) {
                 return module
             }
         }
@@ -117,74 +115,74 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
         return nil
     }
     
-    public func willPlay() {
+    open func willPlay() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.willPlay)) {
+            if module.responds(to: #selector(CPModuleDelegate.willPlay)) {
                 module.willPlay!()
             }
         }
     }
     
-    public func startPlay() {
+    open func startPlay() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.startPlay)) {
+            if module.responds(to: #selector(CPModuleDelegate.startPlay)) {
                 module.startPlay!()
             }
         }
     }
     
-    public func cancelPlay() {
+    open func cancelPlay() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.cancelPlay)) {
+            if module.responds(to: #selector(CPModuleDelegate.cancelPlay)) {
                 module.cancelPlay!()
             }
         }
         
     }
     
-    public func willPend() {
+    open func willPend() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.willPend)) {
+            if module.responds(to: #selector(CPModuleDelegate.willPend)) {
                 module.willPend!()
             }
         }
     }
     
-    public func endPend() {
+    open func endPend() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.endPend)) {
+            if module.responds(to: #selector(CPModuleDelegate.endPend)) {
                 module.endPend!()
             }
         }
     }
     
-    public func willPause() {
+    open func willPause() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.willPause)) {
+            if module.responds(to: #selector(CPModuleDelegate.willPause)) {
                 module.willPause!()
             }
         }
     }
     
-    public func endPause() {
+    open func endPause() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.endPause)) {
+            if module.responds(to: #selector(CPModuleDelegate.endPause)) {
                 module.endPause!()
             }
         }
     }
     
-    public func appResign() {
+    open func appResign() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.appResign)) {
+            if module.responds(to: #selector(CPModuleDelegate.appResign)) {
                 module.appResign!()
             }
         }
     }
     
-    public func appActive() {
+    open func appActive() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.appActive)) {
+            if module.responds(to: #selector(CPModuleDelegate.appActive)) {
                 module.appActive!()
             }
         }
@@ -193,121 +191,121 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     /**
     *called by Core Player when frame changes
     */
-    public func layoutView() {
+    open func layoutView() {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleViewDelegate.layoutView)) {
+            if module.responds(to: #selector(CPModuleViewDelegate.layoutView)) {
                 let vodule = module as! CPModuleViewDelegate
                 vodule.layoutView()
             }
         }
     }
     
-    public func endPlayCode(state: CPState) {
+    open func endPlayCode(_ state: CPState) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.endPlayCode(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.endPlayCode(_:))) {
                 module.endPlayCode!(state)
             }
         }
     }
-    public func endSection(cp: CPURL) {
+    open func endSection(_ cp: CPURL) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.endSection(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.endSection(_:))) {
                 module.endSection!(cp)
             }
         }
     }
     
-    public func startSection(cp: CPURL) {
+    open func startSection(_ cp: CPURL) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.startSection(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.startSection(_:))) {
                 module.startSection!(cp)
             }
         }
     }
     
-    public func willSection(cp: CPURL) {
+    open func willSection(_ cp: CPURL) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.willSection(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.willSection(_:))) {
                 module.willSection!(cp)
             }
         }
     }
     
-    public func airplayShift(on: Bool) {
+    open func airplayShift(_ on: Bool) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.airplayShift(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.airplayShift(_:))) {
                 module.airplayShift!(on)
             }
         }
     }
     
-    public func startSeek(time: NSTimeInterval) {
+    open func startSeek(_ time: TimeInterval) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.startSeek(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.startSeek(_:))) {
                 module.startSeek!(time)
             }
         }
     }
     
-    public func seekTo(time: NSTimeInterval) {
+    open func seekTo(_ time: TimeInterval) {
         for module in modules {
-            if module.respondsToSelector(#selector(CorePlayerFeature.seekTo(_:))) {
+            if module.responds(to: #selector(CorePlayerFeature.seekTo(_:))) {
                 module.seekTo!(time)
             }
         }
     }
     
-    public func endSeek(time: NSTimeInterval, isEnd end:Bool) {
+    open func endSeek(_ time: TimeInterval, isEnd end:Bool) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.endSeek(_:isEnd:))) {
+            if module.responds(to: #selector(CPModuleDelegate.endSeek(_:isEnd:))) {
                 module.endSeek!(time, isEnd: end)
             }
         }
     }
     
-    public func durationAvailable(duration: NSTimeInterval) {
+    open func durationAvailable(_ duration: TimeInterval) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.durationAvailable(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.durationAvailable(_:))) {
                 module.durationAvailable!(duration)
             }
         }
     }
     
-    public func played(duration: NSTimeInterval) {
+    open func played(_ duration: TimeInterval) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.played(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.played(_:))) {
                 module.played!(duration)
             }
         }
     }
     
-    public func playable(duration: NSTimeInterval) {
+    open func playable(_ duration: TimeInterval) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.playable(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.playable(_:))) {
                 module.playable!(duration)
             }
         }
     }
     
-    public func error(err: CPError) {
+    open func error(_ err: CPError) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.error(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.error(_:))) {
                 module.error!(err)
             }
         }
     }
     
-    public func interrupt(reason: InterruptionReason) {
+    open func interrupt(_ reason: InterruptionReason) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.interrupt(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.interrupt(_:))) {
                 module.interrupt!(reason)
             }
         }
     }
     
-    public func presentationSize(size: CGSize) {
+    open func presentationSize(_ size: CGSize) {
         for module in modules {
-            if module.respondsToSelector(#selector(CPModuleDelegate.presentationSize(_:))) {
+            if module.responds(to: #selector(CPModuleDelegate.presentationSize(_:))) {
                 module.presentationSize!(size)
             }
         }
@@ -315,19 +313,19 @@ public class CPModuleManager: NSObject, CPModuleDelegate {
     
     #if os(iOS)
     
-    public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    open func touchesBegan(_ touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    public func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    open func touchesEnded(_ touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    public func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    open func touchesMoved(_ touches: Set<NSObject>, withEvent event: UIEvent?) {
         
     }
     
-    public func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?) {
+    open func touchesCancelled(_ touches: Set<NSObject>!, withEvent event: UIEvent?) {
         
     }
     

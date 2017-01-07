@@ -8,18 +8,18 @@
 
 import Foundation
 
-public class CPURL: NSObject {
-    public var URL: NSURL!
-    public var UA: String? /// Custom UA
-    public var from: Double = 0 /// When to play from
-    public var HTTPHeaderFields: [String: String]? /// User-Agent, Cookie, etc
+open class CPURL: NSObject {
+    open var URL: Foundation.URL!
+    open var UA: String? /// Custom UA
+    open var from: Double = 0 /// When to play from
+    open var HTTPHeaderFields: [String: String]? /// User-Agent, Cookie, etc
     
-    public init(URL: NSURL!, from: Double) {
+    public init(URL: Foundation.URL!, from: Double) {
         self.URL = URL
         self.from = from
     }
     
-    public convenience init(URL: NSURL!) {
+    public convenience init(URL: Foundation.URL!) {
         self.init(URL: URL, from: 0)
     }
 }

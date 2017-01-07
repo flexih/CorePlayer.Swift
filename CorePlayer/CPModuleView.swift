@@ -14,47 +14,47 @@
     public typealias UXView = NSView
 #endif
     
-public class CPModuleView: UXView, CPModuleViewDelegate {
+open class CPModuleView: UXView, CPModuleViewDelegate {
     
-    public var moduleID: Int = 0
-    public weak var moduleManager: CPModuleManager?
-    public weak var moduleDelegate: CorePlayerFeature?
+    open var moduleID: Int = 0
+    open weak var moduleManager: CPModuleManager?
+    open weak var moduleDelegate: CorePlayerFeature?
     
-    public func moduleType() -> ModuleType {
-        return .View
+    open func moduleType() -> ModuleType {
+        return .view
     }
     
     /**
      View hierarchy of player's view
     */
-    public func viewIndex() -> Int {
+    open func viewIndex() -> Int {
         return 0
     }
     
     /**
      When player's view layout, do custom layout
     */
-    public func layoutView() {
+    open func layoutView() {
         
     }
     
-    public func willShow() {
+    open func willShow() {
         #if os(iOS)
             alpha = 1
         #endif
     }
     
-    public func willHide() {
+    open func willHide() {
         #if os(iOS)
             alpha = 0
         #endif
     }
     
-    public func initModule() {
+    open func initModule() {
         
     }
     
-    public func deinitModule() {
+    open func deinitModule() {
         
     }
 }

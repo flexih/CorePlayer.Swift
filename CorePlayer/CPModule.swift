@@ -8,21 +8,21 @@
 
 import Foundation
 
-@objc public class CPModule: NSObject, CPModuleDelegate {
+@objc open class CPModule: NSObject, CPModuleDelegate {
     
-    public var moduleID: Int = 0
-    public weak var moduleManager: CPModuleManager?
-    public weak var moduleDelegate: CorePlayerFeature?
+    open var moduleID: Int = 0
+    open weak var moduleManager: CPModuleManager?
+    open weak var moduleDelegate: CorePlayerFeature?
     
-    public func moduleType() -> ModuleType {
-        return .Feature
+    open func moduleType() -> ModuleType {
+        return .feature
     }
 
-    public func initModule() {
+    open func initModule() {
         
     }
     
-    public func deinitModule() {
+    open func deinitModule() {
         
     }
 }

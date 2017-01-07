@@ -14,8 +14,8 @@ import AVFoundation
 #endif
 
 enum VideoGravity: Int {
-    case Aspect = 1
-    case Fill
+    case aspect = 1
+    case fill
 }
 
 class CPPlayerView: UXView {
@@ -24,14 +24,14 @@ class CPPlayerView: UXView {
         get {
             let videoGravity = playerLayer().videoGravity
             if videoGravity == AVLayerVideoGravityResizeAspect {
-                return .Aspect
+                return .aspect
             } else {
-                return .Fill
+                return .fill
             }
         }
         
         set(newGravity) {
-            if newGravity == .Aspect {
+            if newGravity == .aspect {
                 playerLayer().videoGravity = AVLayerVideoGravityResizeAspect
             } else {
                 playerLayer().videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -48,7 +48,7 @@ class CPPlayerView: UXView {
     
     #if os(iOS)
     
-    override class func layerClass() -> AnyClass {
+    override class var layerClass : AnyClass {
         return AVPlayerLayer.self
     }
     
@@ -67,7 +67,7 @@ class CPPlayerView: UXView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         #if os(iOS)
-            userInteractionEnabled = false
+            isUserInteractionEnabled = false
         #else
             wantsLayer = true
             layer = AVPlayerLayer()

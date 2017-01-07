@@ -19,19 +19,19 @@ class CPPlayer: AVPlayer {
         return "externalPlaybackActive"
     }
     
-    func listenAirPlayState(observer: NSObject) -> Bool {
+    func listenAirPlayState(_ observer: NSObject) -> Bool {
         let key = airPlayObserverKey()
         
         if key == magicKey {
             return false
         }
         
-        addObserver(observer, forKeyPath: key, options: [.Old, .New], context: nil)
+        addObserver(observer, forKeyPath: key, options: [.old, .new], context: nil)
         
         return true
     }
     
-    func unlistenAirPlayState(observer: NSObject) {
+    func unlistenAirPlayState(_ observer: NSObject) {
         let key = airPlayObserverKey()
         
         removeObserver(observer, forKeyPath: key)
@@ -39,7 +39,7 @@ class CPPlayer: AVPlayer {
     
     #endif
     
-    class func isRatePlaying(rate: Float) -> Bool {
+    class func isRatePlaying(_ rate: Float) -> Bool {
         return rate > 0
     }
     
@@ -56,7 +56,7 @@ class CPPlayer: AVPlayer {
         var played_sec: Float64  = CMTimeGetSeconds(played)
         var duration_sec: Float64  = CMTimeGetSeconds(duration)
         
-        if !(isfinite(played_sec) && isfinite(duration_sec)) {
+        if !(played_sec.isFinite && duration_sec.isFinite) {
             return false
         }
         
@@ -66,20 +66,20 @@ class CPPlayer: AVPlayer {
         return fabs(played_sec - duration_sec) <= 5.0
     }
     
-    func seekToTime(time: CMTime, accurate: Bool, completion: ((Bool) -> Void)?) {
+    func seekToTime(_ time: CMTime, accurate: Bool, completion: ((Bool) -> Void)?) {
         if completion != nil {
             if accurate {
-                seekToTime(time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: completion!)
+                seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: completion!)
             } else {
-                seekToTime(time, completionHandler: completion!)
+                seek(to: time, completionHandler: completion!)
             }
         } else {
-            seekToTime(time)
+            seek(to: time)
         }
     }
     
-    func ccurrentTime() -> NSTimeInterval {
+    func ccurrentTime() -> TimeInterval {
         let rlt = CMTimeGetSeconds(currentTime())
-        return isfinite(rlt) ? rlt : 0
+        return rlt.isFinite ? rlt : 0
     }
 }

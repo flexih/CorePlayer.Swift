@@ -21,10 +21,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         corePlayer.view().frame = self.view.bounds
-        corePlayer.view().autoresizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
+        corePlayer.view().autoresizingMask = UIViewAutoresizing.flexibleWidth.union(UIViewAutoresizing.flexibleHeight)
         view.addSubview(corePlayer.view())
       
-        corePlayer.playURL(NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!)
+        corePlayer.playURL(URL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!)
     }
     
     override func didReceiveMemoryWarning() {

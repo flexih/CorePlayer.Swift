@@ -17,7 +17,7 @@ class ModuleView: CPModuleView {
     }
     
     override func layoutView() {
-        self.frame = CGRectMake(0, 0, 100, 50)
+        self.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
     }
     
     override func layoutSubviews() {
@@ -27,17 +27,17 @@ class ModuleView: CPModuleView {
     
     override func initModule() {
         NSLog("initModule")
-        button.backgroundColor = UIColor.blueColor()
-        button.addTarget(self, action: #selector(ModuleView.buttonClicked), forControlEvents: UIControlEvents.TouchUpInside)
-        button.setTitle("Pause", forState: UIControlState.Normal)
-        button.setTitle("Play", forState: UIControlState.Selected)
+        button.backgroundColor = UIColor.blue
+        button.addTarget(self, action: #selector(ModuleView.buttonClicked), for: UIControlEvents.touchUpInside)
+        button.setTitle("Pause", for: UIControlState())
+        button.setTitle("Play", for: UIControlState.selected)
         self.addSubview(button)
         self.moduleDelegate?.view().addSubview(self)
         
     }
     
     func buttonClicked() {
-        button.selected = !button.selected
+        button.isSelected = !button.isSelected
         if self.moduleDelegate!.isPlaying() {
             self.moduleDelegate?.pause()
         } else {
@@ -57,19 +57,19 @@ class ModuleView: CPModuleView {
         NSLog("cancelPlay")
     }
     
-    func endPlayCode(state: CPState) {
+    func endPlayCode(_ state: CPState) {
         NSLog("endPlayCode")
     }
     
-    func willSection(cpu: CPURL) {
+    func willSection(_ cpu: CPURL) {
         NSLog("willSection")
     }
     
-    func startSection(cpu: CPURL) {
+    func startSection(_ cpu: CPURL) {
         NSLog("startSection")
     }
     
-    func endSection(cpu: CPURL) {
+    func endSection(_ cpu: CPURL) {
         NSLog("endSection")
     }
     
@@ -89,27 +89,27 @@ class ModuleView: CPModuleView {
         NSLog("endPause")
     }
     
-    func startSeek(time: NSTimeInterval) {
+    func startSeek(_ time: TimeInterval) {
         NSLog("startSeek")
     }
     
-    func seekTo(time: NSTimeInterval) {
+    func seekTo(_ time: TimeInterval) {
         NSLog("seekTo")
     }
     
-    func endSeek(time: NSTimeInterval, isEnd: Bool) {
+    func endSeek(_ time: TimeInterval, isEnd: Bool) {
         NSLog("endSeek")
     }
     
-    func durationAvailable(duration: NSTimeInterval) {
+    func durationAvailable(_ duration: TimeInterval) {
         NSLog("durationAvailable")
     }
     
-    func played(duration: NSTimeInterval) {
+    func played(_ duration: TimeInterval) {
         NSLog("played")
     }
     
-    func playable(duration: NSTimeInterval) {
+    func playable(_ duration: TimeInterval) {
         NSLog("playable")
     }
     
@@ -121,19 +121,19 @@ class ModuleView: CPModuleView {
         NSLog("appActive")
     }
     
-    func presentationSize(size: CGSize) {
+    func presentationSize(_ size: CGSize) {
         NSLog("presentationSize")
     }
     
-    func airplayShift(on: Bool) {
+    func airplayShift(_ on: Bool) {
         NSLog("airplayShift")
     }
     
-    func interrupt(reason: InterruptionReason) {
+    func interrupt(_ reason: InterruptionReason) {
         NSLog("interrupt")
     }
     
-    func error(err: Int) {
+    func error(_ err: Int) {
         NSLog("error")
     }
 }

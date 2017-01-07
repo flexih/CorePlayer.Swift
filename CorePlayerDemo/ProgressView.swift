@@ -13,7 +13,7 @@ class ProgressView: CPModuleView {
     let lable = UILabel()
 
     override func layoutView() {
-        self.frame = CGRectMake(CGRectGetWidth(self.superview!.bounds) - 120, 0, 120, 50)
+        self.frame = CGRect(x: self.superview!.bounds.width - 120, y: 0, width: 120, height: 50)
     }
 
     override func layoutSubviews() {
@@ -22,17 +22,17 @@ class ProgressView: CPModuleView {
     }
 
     override func initModule() {
-        self.backgroundColor = UIColor.blueColor()
-        lable.textColor = UIColor.whiteColor()
-        lable.backgroundColor = UIColor.clearColor()
-        lable.font = UIFont.systemFontOfSize(12)
-        lable.textAlignment = .Center
+        self.backgroundColor = UIColor.blue
+        lable.textColor = UIColor.white
+        lable.backgroundColor = UIColor.clear
+        lable.font = UIFont.systemFont(ofSize: 12)
+        lable.textAlignment = .center
         self.addSubview(lable)
         self.moduleDelegate?.view().addSubview(self)
 
     }
 
-    func durationStringFromSeconds(secs: NSTimeInterval) -> String {
+    func durationStringFromSeconds(_ secs: TimeInterval) -> String {
         let hour = Int(secs) / 3600
         let min = Int(secs / 60) % 60
         let sec = Int(secs) % 60
@@ -44,11 +44,11 @@ class ProgressView: CPModuleView {
         }
     }
 
-    func durationAvailable(duration: NSTimeInterval) {
+    func durationAvailable(_ duration: TimeInterval) {
         lable.text = durationStringFromSeconds(self.moduleDelegate!.played()) + "/" + durationStringFromSeconds(duration)
     }
 
-    func played(duration: NSTimeInterval) {
+    func played(_ duration: TimeInterval) {
         lable.text = durationStringFromSeconds(duration) + "/" + durationStringFromSeconds(self.moduleDelegate!.duration())
     }
 }

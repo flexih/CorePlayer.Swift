@@ -14,13 +14,13 @@
 
 protocol CPContentLayoutManager: NSObjectProtocol {
     
-    func contentsLayout(view: UXView)
+    func contentsLayout(_ view: UXView)
     
     #if os(iOS)
-    func contentsTouchesBegan(touches: Set<NSObject>, withEvent event: UIEvent?)
-    func contentsTouchesMoved(touches: Set<NSObject>, withEvent event: UIEvent?)
-    func contentsTouchesEnded(touches: Set<NSObject>, withEvent event: UIEvent?)
-    func contentsTouchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent?)
+    func contentsTouchesBegan(_ touches: Set<NSObject>, withEvent event: UIEvent?)
+    func contentsTouchesMoved(_ touches: Set<NSObject>, withEvent event: UIEvent?)
+    func contentsTouchesEnded(_ touches: Set<NSObject>, withEvent event: UIEvent?)
+    func contentsTouchesCancelled(_ touches: Set<NSObject>!, withEvent event: UIEvent?)
     #else
     func contentsMouseDown(theEvent: NSEvent)
     func contentsRightMouseDown(theEvent: NSEvent)
@@ -50,19 +50,19 @@ class CPContentView: UXView {
         layoutManager?.contentsLayout(self)
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         layoutManager?.contentsTouchesBegan(touches, withEvent: event)
     }
 
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         layoutManager?.contentsTouchesMoved(touches, withEvent: event)
     }
 
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         layoutManager?.contentsTouchesEnded(touches, withEvent: event)
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         layoutManager?.contentsTouchesCancelled(touches, withEvent: event)
     }
     

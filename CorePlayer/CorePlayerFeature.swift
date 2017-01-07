@@ -9,19 +9,19 @@
 import AVFoundation
 
 @objc public enum CPState: Int {
-    case None
-    case AssetReady
-    case ItemReady
-    case PlayReady
-    case End
-    case Failed
-    case Error
-    case Stop
+    case none
+    case assetReady
+    case itemReady
+    case playReady
+    case end
+    case failed
+    case error
+    case stop
 }
 
 @objc public enum CPError: Int {
-    case URLError = -1000
-    case Error
+    case urlError = -1000
+    case error
 }
 
 @objc public protocol CorePlayerFeature: NSObjectProtocol {
@@ -31,10 +31,10 @@ import AVFoundation
     var allowAirPlay: Bool { get set }
     #endif
     
-    func playURL(URL: NSURL)
-    func playURLs(cpus: Array<CPURL>)
-    func appendURLs(cpus: Array<CPURL>)
-    func appendURL(URL: NSURL)
+    func playURL(_ URL: URL)
+    func playURLs(_ cpus: Array<CPURL>)
+    func appendURLs(_ cpus: Array<CPURL>)
+    func appendURL(_ URL: URL)
     
     func avplayer() -> AVPlayer?
     func moduleManager() -> CPModuleManager
@@ -43,8 +43,8 @@ import AVFoundation
     func playerView() -> UXView
     
     func cpu() -> CPURL?
-    func duration() -> NSTimeInterval
-    func played() -> NSTimeInterval
+    func duration() -> TimeInterval
+    func played() -> TimeInterval
     func state() -> CPState
     func presentationSize() -> CGSize
     
@@ -74,8 +74,8 @@ import AVFoundation
     */
     func dpause()
     
-    func beginSeek(time: NSTimeInterval)
-    func seekTo(time: NSTimeInterval)
-    func endSeek(time: NSTimeInterval)
+    func beginSeek(_ time: TimeInterval)
+    func seekTo(_ time: TimeInterval)
+    func endSeek(_ time: TimeInterval)
     func seekToEnd()
 }
