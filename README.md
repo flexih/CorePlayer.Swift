@@ -15,11 +15,14 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 ## How To Get Started
 - pod 'CorePlayer'
 - compile source files
+- branch `Swift3` for Swift 3.0
 
 
 ## Architecture
 
-##### `CPModuleManager`
+- [ ] new arch is in plan, which uses AVQueuePlayer and AVPlayerItems preloading before play. 
+
+##### CPModuleManager`
 
 ##### `CPModule`
 - Feature module, non-view
