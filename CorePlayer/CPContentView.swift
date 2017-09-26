@@ -67,84 +67,84 @@ class CPContentView: UXView {
     }
     
     #else
-    override func resizeSubviewsWithOldSize(oldSize: NSSize) {
-        super.resizeSubviewsWithOldSize(oldSize)
+    override func resizeSubviews(withOldSize oldSize: NSSize) {
+        super.resizeSubviews(withOldSize: oldSize)
         layoutManager?.contentsLayout(self)
     }
     
-    override func mouseDown(theEvent: NSEvent) {
-        super.mouseDown(theEvent)
-        layoutManager?.contentsMouseDown(theEvent)
+    override func mouseDown(with theEvent: NSEvent) {
+        super.mouseDown(with: theEvent)
+        layoutManager?.contentsMouseDown(theEvent: theEvent)
     }
     
-    override func rightMouseDown(theEvent: NSEvent) {
-        super.rightMouseDown(theEvent)
-        layoutManager?.contentsRightMouseDown(theEvent)
+    override func rightMouseDown(with theEvent: NSEvent) {
+        super.rightMouseDown(with: theEvent)
+        layoutManager?.contentsRightMouseDown(theEvent: theEvent)
     }
     
-    override func otherMouseDown(theEvent: NSEvent) {
-        super.otherMouseDown(theEvent)
-        layoutManager?.contentsOtherMouseDown(theEvent)
+    override func otherMouseDown(with theEvent: NSEvent) {
+        super.otherMouseDown(with: theEvent)
+        layoutManager?.contentsOtherMouseDown(theEvent: theEvent)
     }
     
-    override func mouseUp(theEvent: NSEvent) {
-        super.mouseUp(theEvent)
-        layoutManager?.contentsMouseUp(theEvent)
+    override func mouseUp(with theEvent: NSEvent) {
+        super.mouseUp(with: theEvent)
+        layoutManager?.contentsMouseUp(theEvent: theEvent)
     }
     
-    override func rightMouseUp(theEvent: NSEvent) {
-        super.rightMouseUp(theEvent)
-        layoutManager?.contentsRightMouseUp(theEvent)
+    override func rightMouseUp(with theEvent: NSEvent) {
+        super.rightMouseUp(with: theEvent)
+        layoutManager?.contentsRightMouseUp(theEvent: theEvent)
     }
     
-    override func otherMouseUp(theEvent: NSEvent) {
-        super.otherMouseUp(theEvent)
-        layoutManager?.contentsOtherMouseUp(theEvent)
+    override func otherMouseUp(with theEvent: NSEvent) {
+        super.otherMouseUp(with: theEvent)
+        layoutManager?.contentsOtherMouseUp(theEvent: theEvent)
     }
     
-    override func mouseMoved(theEvent: NSEvent) {
-        super.mouseMoved(theEvent)
-        layoutManager?.contentsMouseMoved(theEvent)
+    override func mouseMoved(with theEvent: NSEvent) {
+        super.mouseMoved(with: theEvent)
+        layoutManager?.contentsMouseMoved(theEvent: theEvent)
     }
     
-    override func mouseDragged(theEvent: NSEvent) {
-        super.mouseDragged(theEvent)
-        layoutManager?.contentsMouseDragged(theEvent)
+    override func mouseDragged(with theEvent: NSEvent) {
+        super.mouseDragged(with: theEvent)
+        layoutManager?.contentsMouseDragged(theEvent: theEvent)
     }
     
-    override func scrollWheel(theEvent: NSEvent) {
-        super.scrollWheel(theEvent)
-        layoutManager?.contentsScrollWheel(theEvent)
+    override func scrollWheel(with theEvent: NSEvent) {
+        super.scrollWheel(with: theEvent)
+        layoutManager?.contentsScrollWheel(theEvent: theEvent)
     }
     
-    override func rightMouseDragged(theEvent: NSEvent) {
-        super.rightMouseDragged(theEvent)
-        layoutManager?.contentsRightMouseDragged(theEvent)
+    override func rightMouseDragged(with theEvent: NSEvent) {
+        super.rightMouseDragged(with: theEvent)
+        layoutManager?.contentsRightMouseDragged(theEvent: theEvent)
     }
     
-    override func otherMouseDragged(theEvent: NSEvent) {
-        super.otherMouseDragged(theEvent)
-        layoutManager?.contentsOtherMouseDragged(theEvent)
+    override func otherMouseDragged(with theEvent: NSEvent) {
+        super.otherMouseDragged(with: theEvent)
+        layoutManager?.contentsOtherMouseDragged(theEvent: theEvent)
     }
     
-    override func mouseEntered(theEvent: NSEvent) {
-        super.mouseEntered(theEvent)
-        layoutManager?.contentsMouseEntered(theEvent)
+    override func mouseEntered(with theEvent: NSEvent) {
+        super.mouseEntered(with: theEvent)
+        layoutManager?.contentsMouseEntered(theEvent: theEvent)
     }
     
-    override func mouseExited(theEvent: NSEvent) {
-        super.mouseExited(theEvent)
-        layoutManager?.contentsMouseExited(theEvent)
+    override func mouseExited(with theEvent: NSEvent) {
+        super.mouseExited(with: theEvent)
+        layoutManager?.contentsMouseExited(theEvent: theEvent)
     }
     
-    override func keyDown(theEvent: NSEvent) {
-        super.keyDown(theEvent)
-        layoutManager?.contentsKeyDown(theEvent)
+    override func keyDown(with theEvent: NSEvent) {
+        super.keyDown(with: theEvent)
+        layoutManager?.contentsKeyDown(theEvent: theEvent)
     }
     
-    override func keyUp(theEvent: NSEvent) {
-        super.keyUp(theEvent)
-        layoutManager?.contentsKeyUp(theEvent)
+    override func keyUp(with theEvent: NSEvent) {
+        super.keyUp(with: theEvent)
+        layoutManager?.contentsKeyUp(theEvent: theEvent)
     }
     #endif
 }

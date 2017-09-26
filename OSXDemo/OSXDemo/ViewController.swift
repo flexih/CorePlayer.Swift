@@ -20,15 +20,15 @@ class ViewController: NSViewController {
         
         view.addSubview(corePlayer.view())
 
-        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .Trailing, relatedBy: .Equal, toItem: view, attribute: .Trailing, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.init(item: corePlayer.view(), attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
 
-        corePlayer.playURL(NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")!)
+        corePlayer.playURL(NSURL(string: "http://devimages.apple.com/samplecode/adDemo/ad.m3u8")! as URL)
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }

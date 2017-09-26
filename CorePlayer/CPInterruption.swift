@@ -28,7 +28,7 @@ class CPInterruption: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func interrupt(_ notification: Notification) {
+    @objc func interrupt(_ notification: Notification) {
         if let info: NSDictionary = notification.userInfo as NSDictionary? {
             if let type: UInt = info.object(forKey: AVAudioSessionInterruptionTypeKey) as? UInt {
                 if type == AVAudioSessionInterruptionType.began.rawValue {

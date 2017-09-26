@@ -36,7 +36,7 @@ class ModuleView: CPModuleView {
         
     }
     
-    func buttonClicked() {
+    @objc func buttonClicked() {
         button.isSelected = !button.isSelected
         if self.moduleDelegate!.isPlaying() {
             self.moduleDelegate?.pause()

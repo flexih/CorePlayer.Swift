@@ -23,7 +23,7 @@ class CPPlayerView: UXView {
         
         get {
             let videoGravity = playerLayer().videoGravity
-            if videoGravity == AVLayerVideoGravityResizeAspect {
+            if videoGravity == AVLayerVideoGravity.resizeAspect {
                 return .aspect
             } else {
                 return .fill
@@ -32,9 +32,9 @@ class CPPlayerView: UXView {
         
         set(newGravity) {
             if newGravity == .aspect {
-                playerLayer().videoGravity = AVLayerVideoGravityResizeAspect
+                playerLayer().videoGravity = AVLayerVideoGravity.resizeAspect
             } else {
-                playerLayer().videoGravity = AVLayerVideoGravityResizeAspectFill
+                playerLayer().videoGravity = AVLayerVideoGravity.resizeAspectFill
             }
         }
     }

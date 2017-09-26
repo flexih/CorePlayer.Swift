@@ -229,7 +229,7 @@ open class CorePlayer: NSObject {
     
     #if os(iOS)
         
-    func appResignActive(_ notification: Notification) {
+    @objc func appResignActive(_ notification: Notification) {
         if let player = player {
             playerstate.lastplay = player.isPlaying()
             
@@ -241,7 +241,7 @@ open class CorePlayer: NSObject {
         cpmoduleManager.appResign()
     }
     
-    func appBecomeActive(_ notification: Notification) {
+    @objc func appBecomeActive(_ notification: Notification) {
         if playerstate.readyplay {
             playerstate.lastplay = playerstate.readyplay
             playerstate.readyplay = false
@@ -357,7 +357,7 @@ open class CorePlayer: NSObject {
                 #if os(iOS)
                     cpview.insertSubview(backView!, at:0)
                 #else
-                    cpview.addSubview(backView!, positioned:.Below, relativeTo:nil)
+                    cpview.addSubview(backView!, positioned:.below, relativeTo:nil)
                 #endif
             } else {
                 superview.addSubview(backView!)
@@ -385,11 +385,11 @@ open class CorePlayer: NSObject {
         }
     }
     
-    func playerItemDidFailed(_ notification: Notification) {
+    @objc func playerItemDidFailed(_ notification: Notification) {
         playEnded(false)
     }
     
-    func playerItemDidReachEnd(_ notification: Notification) {
+    @objc func playerItemDidReachEnd(_ notification: Notification) {
         playEnded(player!.isPlayToEnd())
     }
     
@@ -506,7 +506,7 @@ open class CorePlayer: NSObject {
         #endif
     }
     
-    func audioSessionRouteChange(_ notification: Notification) {
+    @objc func audioSessionRouteChange(_ notification: Notification) {
         
     }
     
@@ -650,7 +650,7 @@ open class CorePlayer: NSObject {
             #if os(iOS)
                 cpmoduleManager.presentationSize((change?[NSKeyValueChangeKey.newKey] as! NSValue).cgSizeValue)
             #else
-                cpmoduleManager.presentationSize((change?[NSKeyValueChangeNewKey] as! NSValue).sizeValue)
+                cpmoduleManager.presentationSize((change?[NSKeyValueChangeKey.newKey] as! NSValue).sizeValue)
             #endif
         } else {
             #if os(iOS)
@@ -698,63 +698,63 @@ extension CorePlayer: CPContentLayoutManager {
     #else
     
     func contentsMouseDown(theEvent: NSEvent) {
-        cpmoduleManager.mouseDown(theEvent)
+        cpmoduleManager.mouseDown(theEvent: theEvent)
     }
     
     func contentsRightMouseDown(theEvent: NSEvent) {
-        cpmoduleManager.rightMouseDown(theEvent)
+        cpmoduleManager.rightMouseDown(theEvent: theEvent)
     }
     
     func contentsOtherMouseDown(theEvent: NSEvent) {
-        cpmoduleManager.otherMouseDown(theEvent)
+        cpmoduleManager.otherMouseDown(theEvent: theEvent)
     }
     
     func contentsMouseUp(theEvent: NSEvent) {
-        cpmoduleManager.mouseUp(theEvent)
+        cpmoduleManager.mouseUp(theEvent: theEvent)
     }
     
     func contentsRightMouseUp(theEvent: NSEvent) {
-        cpmoduleManager.rightMouseUp(theEvent)
+        cpmoduleManager.rightMouseUp(theEvent: theEvent)
     }
     
     func contentsOtherMouseUp(theEvent: NSEvent) {
-        cpmoduleManager.otherMouseUp(theEvent)
+        cpmoduleManager.otherMouseUp(theEvent: theEvent)
     }
     
     func contentsMouseMoved(theEvent: NSEvent) {
-        cpmoduleManager.mouseMoved(theEvent)
+        cpmoduleManager.mouseMoved(theEvent: theEvent)
     }
     
     func contentsMouseDragged(theEvent: NSEvent) {
-        cpmoduleManager.mouseDragged(theEvent)
+        cpmoduleManager.mouseDragged(theEvent: theEvent)
     }
     
     func contentsScrollWheel(theEvent: NSEvent) {
-        cpmoduleManager.scrollWheel(theEvent)
+        cpmoduleManager.scrollWheel(theEvent: theEvent)
     }
     
     func contentsRightMouseDragged(theEvent: NSEvent) {
-        cpmoduleManager.rightMouseDragged(theEvent)
+        cpmoduleManager.rightMouseDragged(theEvent: theEvent)
     }
     
     func contentsOtherMouseDragged(theEvent: NSEvent) {
-        cpmoduleManager.otherMouseDragged(theEvent)
+        cpmoduleManager.otherMouseDragged(theEvent: theEvent)
     }
     
     func contentsMouseEntered(theEvent: NSEvent) {
-        cpmoduleManager.mouseEntered(theEvent)
+        cpmoduleManager.mouseEntered(theEvent: theEvent)
     }
     
     func contentsMouseExited(theEvent: NSEvent) {
-        cpmoduleManager.mouseExited(theEvent)
+        cpmoduleManager.mouseExited(theEvent: theEvent)
     }
     
     func contentsKeyDown(theEvent: NSEvent) {
-        cpmoduleManager.keyDown(theEvent)
+        cpmoduleManager.keyDown(theEvent: theEvent)
     }
     
     func contentsKeyUp(theEvent: NSEvent) {
-        cpmoduleManager.keyUp(theEvent)
+        cpmoduleManager.keyUp(theEvent: theEvent)
     }
     
     #endif
