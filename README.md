@@ -1,5 +1,5 @@
 # CorePlayer.Swift
-![Swift](https://img.shields.io/badge/Swift-2.2-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
 ![pod](https://img.shields.io/badge/pod-v1.8-green.svg)
 ![platform](https://img.shields.io/badge/platform-ios%20%7C%20osx-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flexih/CorePlayer.Swift/blob/master/LICENSE)
@@ -16,6 +16,7 @@ A iOS and OSX media player framework based on AVPlayer. Make your player UI and 
 - pod 'CorePlayer'
 - compile source files
 - branch `Swift3` for Swift 3.0
+- branch `Swift4` for Swift 4.0
 
 
 ## Architecture
